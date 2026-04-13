@@ -458,7 +458,7 @@
 
   <!-- Ayah display -->
   <div class="ayah-card">
-    <div class="ayah-label">من أي سورة هذه الآيات؟</div>
+    <div class="ayah-label">من أي سورة هذه الآية؟</div>
     <div class="ayah-text" id="ayah-text">...</div>
   </div>
 
@@ -909,16 +909,8 @@ function loadQuestion(){
   document.getElementById('g-remain').textContent=total-gCurrent;
   document.getElementById('g-total-count').textContent=total;
 
-  // Pick 2 ayahs from this surah (current + one more different if available)
-  const bank = ayahBank[correctSurah.qn];
-  let ayahText = ayah.t;
-  // Try to add a second distinct ayah from same surah
-  const otherAyahs = bank.filter((_,idx)=>idx!==ai);
-  if(otherAyahs.length>0){
-    const second = otherAyahs[Math.floor(Math.random()*otherAyahs.length)];
-    ayahText = ayah.t + ' ۝ ' + second.t;
-  }
-  document.getElementById('ayah-text').textContent=ayahText;
+  // Show single ayah only — no merging between ayahs
+  document.getElementById('ayah-text').textContent=ayah.t;
   document.getElementById('guess-feedback').textContent='';
   document.getElementById('guess-feedback').className='guess-feedback';
   document.getElementById('guess-next-btn').style.display='none';
