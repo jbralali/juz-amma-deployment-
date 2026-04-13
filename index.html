@@ -19,7 +19,6 @@
   body { font-family:'Scheherazade New',serif; font-size:20px; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
   body::before { content:''; position:fixed; inset:0; background-image: radial-gradient(ellipse at 20% 20%,rgba(201,168,76,0.06) 0%,transparent 50%), radial-gradient(ellipse at 80% 80%,rgba(201,168,76,0.04) 0%,transparent 50%); pointer-events:none; z-index:0; }
 
-  /* OVERLAY */
   .overlay { position:fixed; inset:0; background:rgba(0,0,0,0.82); display:flex; align-items:center; justify-content:center; z-index:200; backdrop-filter:blur(6px); animation:fadeIn 0.3s ease; }
   .overlay.hidden { display:none; }
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
@@ -38,9 +37,9 @@
   .mbtn-quran { background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.05)); color:var(--gold); border:2px solid rgba(201,168,76,0.35); }
   .mbtn-quran:hover { background:rgba(201,168,76,0.18); }
   .mbtn-t1 { background:linear-gradient(135deg,rgba(58,143,232,0.2),rgba(58,143,232,0.1)); color:var(--t1); border:2px solid rgba(58,143,232,0.4); flex:1; }
-  .mbtn-t1:hover { background:rgba(58,143,232,0.25); box-shadow:0 4px 14px var(--t1-glow); }
+  .mbtn-t1:hover { background:rgba(58,143,232,0.25); }
   .mbtn-t2 { background:linear-gradient(135deg,rgba(232,92,58,0.2),rgba(232,92,58,0.1)); color:var(--t2); border:2px solid rgba(232,92,58,0.4); flex:1; }
-  .mbtn-t2:hover { background:rgba(232,92,58,0.25); box-shadow:0 4px 14px var(--t2-glow); }
+  .mbtn-t2:hover { background:rgba(232,92,58,0.25); }
   .mbtn-green { background:linear-gradient(135deg,rgba(76,175,125,0.2),rgba(76,175,125,0.1)); color:var(--green); border:2px solid rgba(76,175,125,0.4); flex:1; }
   .mbtn-green:hover { background:rgba(76,175,125,0.25); }
   .mbtn-red { background:linear-gradient(135deg,rgba(232,92,58,0.2),rgba(232,92,58,0.1)); color:var(--red); border:2px solid rgba(232,92,58,0.4); flex:1; }
@@ -51,12 +50,11 @@
   .team-inputs { display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
   .team-input-row { display:flex; align-items:center; gap:10px; }
   .team-input-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-  .t1-dot { background:var(--t1); box-shadow:0 0 8px var(--t1-glow); }
-  .t2-dot { background:var(--t2); box-shadow:0 0 8px var(--t2-glow); }
+  .t1-dot { background:var(--t1); } .t2-dot { background:var(--t2); }
   .team-name-inp { flex:1; font-family:'Scheherazade New',serif; font-size:19px; background:var(--bg3); border:1px solid rgba(201,168,76,0.2); border-radius:10px; color:var(--text); padding:8px 14px; outline:none; text-align:right; }
   .team-name-inp:focus { border-color:rgba(201,168,76,0.5); }
 
-  /* MAIN PAGE */
+  /* MAIN */
   .page { position:relative; z-index:1; max-width:980px; margin:0 auto; padding:36px 20px 80px; }
   .header { text-align:center; margin-bottom:28px; animation:fadeDown 0.8s ease both; }
   .header-bismillah { font-size:28px; color:var(--gold); margin-bottom:6px; text-shadow:0 0 20px var(--shadow-gold); }
@@ -71,7 +69,7 @@
   .mode-badge:hover { border-color:rgba(201,168,76,0.4); color:var(--text); }
   .mode-badge-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); }
 
-  .scoreboard { display:flex; align-items:stretch; margin-bottom:22px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.06); animation:fadeDown 0.8s 0.1s ease both; }
+  .scoreboard { display:flex; align-items:stretch; margin-bottom:22px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.06); }
   .team-panel { flex:1; padding:18px 14px; display:flex; flex-direction:column; align-items:center; gap:5px; }
   .team1-panel { background:linear-gradient(135deg,rgba(58,143,232,0.15),rgba(58,143,232,0.05)); border-left:1px solid rgba(255,255,255,0.06); }
   .team2-panel { background:linear-gradient(135deg,rgba(232,92,58,0.15),rgba(232,92,58,0.05)); }
@@ -85,7 +83,7 @@
   .tp-label { font-size:12px; color:var(--text-dim); }
   .score-vs { display:flex; align-items:center; justify-content:center; padding:14px 10px; background:var(--bg3); font-size:13px; color:var(--text-dim); min-width:44px; }
 
-  .ind-stats { display:flex; justify-content:center; gap:20px; margin-bottom:22px; animation:fadeDown 0.8s 0.1s ease both; }
+  .ind-stats { display:flex; justify-content:center; gap:20px; margin-bottom:22px; }
   .ind-pill { background:var(--bg3); border:1px solid rgba(201,168,76,0.18); border-radius:50px; padding:8px 22px; display:flex; flex-direction:column; align-items:center; gap:2px; }
   .ind-pill-label { font-size:12px; color:var(--text-dim); }
   .ind-pill-val { font-size:22px; font-weight:700; }
@@ -99,7 +97,7 @@
   .controls { display:flex; justify-content:center; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
   .btn { font-family:'Scheherazade New',serif; font-size:17px; padding:9px 22px; border-radius:50px; border:none; cursor:pointer; transition:all 0.2s ease; }
   .btn-primary { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#0d0d0e; font-weight:700; box-shadow:0 4px 18px var(--shadow-gold); }
-  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 24px var(--shadow-gold); }
+  .btn-primary:hover { transform:translateY(-2px); }
   .btn-outline { background:transparent; border:1px solid rgba(201,168,76,0.35); color:var(--gold); }
   .btn-outline:hover { background:rgba(201,168,76,0.08); }
 
@@ -114,38 +112,34 @@
   .card-answer { text-align:center; font-size:20px; color:var(--text); line-height:1.4; transform:scale(0.7); opacity:0; transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1); max-height:0; overflow:hidden; }
   .card-hint { font-size:13px; color:var(--text-dim); transition:opacity 0.2s; }
   .card-badge { position:absolute; top:7px; left:8px; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; opacity:0; transition:opacity 0.3s; white-space:nowrap; }
+  .card-read-btn { position:absolute; bottom:7px; left:8px; font-size:15px; cursor:pointer; opacity:0; transition:opacity 0.3s; background:none; border:none; color:var(--gold); padding:2px; line-height:1; }
+  .card.revealed .card-read-btn { opacity:0.55; }
+  .card.revealed .card-read-btn:hover { opacity:1; }
 
   .card.revealed { cursor:default; transform:none !important; }
   .card.revealed .card-answer { opacity:1; transform:scale(1); max-height:100px; }
   .card.revealed .card-hint { opacity:0; max-height:0; overflow:hidden; }
   .card.revealed .card-badge { opacity:1; }
 
-  .card.rev-t1 { border-color:rgba(58,143,232,0.45); background:linear-gradient(135deg,rgba(58,143,232,0.1),var(--bg3)); box-shadow:0 4px 20px rgba(58,143,232,0.12); }
+  .card.rev-t1 { border-color:rgba(58,143,232,0.45); background:linear-gradient(135deg,rgba(58,143,232,0.1),var(--bg3)); }
   .card.rev-t1 .card-number { background:linear-gradient(135deg,#1a5fa8,var(--t1)); }
   .card.rev-t1 .card-badge { background:rgba(58,143,232,0.2); color:var(--t1); border:1px solid rgba(58,143,232,0.3); }
-  .card.rev-t2 { border-color:rgba(232,92,58,0.45); background:linear-gradient(135deg,rgba(232,92,58,0.1),var(--bg3)); box-shadow:0 4px 20px rgba(232,92,58,0.12); }
+  .card.rev-t2 { border-color:rgba(232,92,58,0.45); background:linear-gradient(135deg,rgba(232,92,58,0.1),var(--bg3)); }
   .card.rev-t2 .card-number { background:linear-gradient(135deg,#a83218,var(--t2)); }
   .card.rev-t2 .card-badge { background:rgba(232,92,58,0.2); color:var(--t2); border:1px solid rgba(232,92,58,0.3); }
-  .card.rev-correct { border-color:rgba(76,175,125,0.45); background:linear-gradient(135deg,rgba(76,175,125,0.1),var(--bg3)); box-shadow:0 4px 20px rgba(76,175,125,0.1); }
+  .card.rev-correct { border-color:rgba(76,175,125,0.45); background:linear-gradient(135deg,rgba(76,175,125,0.1),var(--bg3)); }
   .card.rev-correct .card-number { background:linear-gradient(135deg,#2d8a5e,var(--green)); }
   .card.rev-correct .card-badge { background:rgba(76,175,125,0.2); color:var(--green); border:1px solid rgba(76,175,125,0.3); }
   .card.rev-wrong { border-color:rgba(232,92,58,0.35); background:linear-gradient(135deg,rgba(232,92,58,0.07),var(--bg3)); }
   .card.rev-wrong .card-number { background:linear-gradient(135deg,#a83218,var(--red)); }
   .card.rev-wrong .card-badge { background:rgba(232,92,58,0.15); color:var(--red); border:1px solid rgba(232,92,58,0.3); }
 
-  /* Card read icon (book shown on already-revealed cards) */
-  .card-read-btn { position:absolute; bottom:7px; left:8px; font-size:15px; cursor:pointer; opacity:0; transition:opacity 0.3s; background:none; border:none; color:var(--gold); padding:2px; }
-  .card.revealed .card-read-btn { opacity:0.6; }
-  .card.revealed .card-read-btn:hover { opacity:1; }
-
   .ripple { position:absolute; border-radius:50%; transform:scale(0); animation:ripple-anim 0.55s linear; pointer-events:none; }
-  .rpl-gold { background:rgba(201,168,76,0.3); } .rpl-t1 { background:rgba(58,143,232,0.3); } .rpl-t2 { background:rgba(232,92,58,0.3); } .rpl-green { background:rgba(76,175,125,0.3); }
+  .rpl-gold{background:rgba(201,168,76,0.3);} .rpl-t1{background:rgba(58,143,232,0.3);} .rpl-t2{background:rgba(232,92,58,0.3);}
   @keyframes ripple-anim { to{transform:scale(4);opacity:0} }
 
   .float-plus { position:fixed; font-size:32px; font-weight:700; pointer-events:none; z-index:999; animation:floatUp 0.9s ease forwards; }
-  .float-plus.t1 { color:var(--t1); text-shadow:0 0 12px var(--t1-glow); }
-  .float-plus.t2 { color:var(--t2); text-shadow:0 0 12px var(--t2-glow); }
-  .float-plus.correct { color:var(--green); }
+  .float-plus.t1{color:var(--t1);} .float-plus.t2{color:var(--t2);} .float-plus.correct{color:var(--green);}
   @keyframes floatUp { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-75px) scale(1.3)} }
 
   .complete-banner { display:none; text-align:center; padding:28px; background:linear-gradient(135deg,rgba(76,175,125,0.12),rgba(201,168,76,0.08)); border:1px solid rgba(76,175,125,0.3); border-radius:20px; margin-bottom:26px; }
@@ -154,16 +148,100 @@
   .complete-banner h2 { font-size:26px; color:var(--green); margin-bottom:4px; }
   .complete-banner p { font-size:16px; color:var(--text-dim); }
 
-  /* QURAN VIEWER */
-  .quran-modal { background:var(--bg2); border:1px solid rgba(201,168,76,0.25); border-radius:24px; width:96%; max-width:680px; max-height:93vh; display:flex; flex-direction:column; overflow:hidden; animation:popIn 0.35s cubic-bezier(0.34,1.56,0.64,1); }
-  .quran-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid rgba(255,255,255,0.06); flex-shrink:0; }
-  .quran-nav-btn { font-family:'Scheherazade New',serif; font-size:16px; background:var(--bg3); border:1px solid rgba(255,255,255,0.1); color:var(--text); padding:6px 16px; border-radius:50px; cursor:pointer; transition:all 0.2s; }
-  .quran-nav-btn:hover { border-color:rgba(201,168,76,0.4); color:var(--gold); }
-  .quran-nav-btn:disabled { opacity:0.3; cursor:default; }
-  .quran-close { font-size:22px; background:none; border:none; color:var(--text-dim); cursor:pointer; padding:4px 8px; line-height:1; transition:color 0.2s; }
+  /* ── QURAN TEXT VIEWER ── */
+  .quran-modal {
+    background:var(--bg2);
+    border:1px solid rgba(201,168,76,0.25);
+    border-radius:24px;
+    width:96%; max-width:660px;
+    max-height:92vh;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+    animation:popIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .quran-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    flex-shrink:0;
+  }
+  .quran-close { font-size:22px; background:none; border:none; color:var(--text-dim); cursor:pointer; padding:4px 8px; line-height:1; }
   .quran-close:hover { color:var(--text); }
-  .quran-body { flex:1; overflow-y:auto; display:flex; align-items:flex-start; justify-content:center; padding:16px; background:#0f0c06; min-height:200px; }
-  .quran-footer { padding:12px 20px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:10px; flex-shrink:0; }
+
+  .quran-body {
+    flex:1; overflow-y:auto;
+    padding:24px 28px;
+    background: linear-gradient(180deg, #0f0c06 0%, #0d0b05 100%);
+  }
+
+  /* Bismillah */
+  .quran-bismillah {
+    text-align:center;
+    font-size:28px;
+    color:var(--gold);
+    margin-bottom:20px;
+    text-shadow:0 0 14px var(--shadow-gold);
+    letter-spacing:1px;
+  }
+
+  /* Surah name header */
+  .quran-surah-header {
+    text-align:center;
+    margin-bottom:20px;
+    padding:14px;
+    background:rgba(201,168,76,0.06);
+    border:1px solid rgba(201,168,76,0.15);
+    border-radius:12px;
+  }
+  .quran-surah-header h2 { font-size:24px; color:var(--gold); margin-bottom:4px; }
+  .quran-surah-header p  { font-size:13px; color:var(--text-dim); }
+
+  /* Ayahs container — flowing text like Quran */
+  .quran-ayahs {
+    font-size:26px;
+    line-height:2.4;
+    text-align:justify;
+    color: #f5e8c0;
+    direction:rtl;
+  }
+
+  .quran-ayah-num {
+    display:inline-block;
+    width:28px; height:28px;
+    border-radius:50%;
+    background:rgba(201,168,76,0.15);
+    border:1px solid rgba(201,168,76,0.3);
+    font-size:13px;
+    text-align:center;
+    line-height:26px;
+    color:var(--gold);
+    margin: 0 4px;
+    vertical-align:middle;
+    flex-shrink:0;
+  }
+
+  .quran-loading {
+    text-align:center;
+    padding:50px 20px;
+    color:var(--text-dim);
+    font-size:18px;
+  }
+  .quran-spinner {
+    width:36px; height:36px;
+    border:3px solid rgba(201,168,76,0.2);
+    border-top-color:var(--gold);
+    border-radius:50%;
+    animation:spin 0.8s linear infinite;
+    margin:0 auto 16px;
+  }
+  @keyframes spin { to{transform:rotate(360deg)} }
+
+  .quran-footer {
+    padding:12px 20px;
+    border-top:1px solid rgba(255,255,255,0.06);
+    display:flex; gap:10px;
+    flex-shrink:0;
+  }
 
   @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeUp   { from{opacity:0;transform:translateY(20px)}  to{opacity:1;transform:translateY(0)} }
@@ -174,6 +252,7 @@
     .grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; }
     .header-title { font-size:30px; } .tp-score { font-size:38px; }
     .modal { padding:28px 20px; } .modal-btns.row { flex-direction:column; }
+    .quran-ayahs { font-size:22px; }
   }
 </style>
 </head>
@@ -206,28 +285,28 @@
   </div>
 </div>
 
-<!-- CARD ACTION (competition) — reveal name OR read surah -->
+<!-- CARD ACTION — competition -->
 <div class="overlay hidden" id="ov-action">
   <div class="modal">
     <span class="modal-icon">🕌</span>
     <div class="modal-title" id="ov-action-title">السورة رقم ١</div>
-    <div class="modal-sub" id="ov-action-sub">ماذا تريد أن تفعل؟</div>
+    <div class="modal-sub">ماذا تريد أن تفعل؟</div>
     <div class="modal-btns" style="gap:10px;">
-      <button class="mbtn mbtn-gold" onclick="doAction('reveal')">🔍 كشف اسم السورة</button>
-      <button class="mbtn mbtn-quran" onclick="doAction('read')">📜 قراءة السورة كاملة من المصحف</button>
+      <button class="mbtn mbtn-gold"  onclick="doAction('reveal')">🔍 كشف اسم السورة</button>
+      <button class="mbtn mbtn-quran" onclick="doAction('read')">📜 قراءة السورة كاملة</button>
     </div>
   </div>
 </div>
 
-<!-- CARD ACTION (review) — same options -->
+<!-- CARD ACTION — review -->
 <div class="overlay hidden" id="ov-action-rev">
   <div class="modal">
     <span class="modal-icon">🕌</span>
     <div class="modal-title" id="ov-action-rev-title">السورة رقم ١</div>
-    <div class="modal-sub" id="ov-action-rev-sub">ماذا تريد أن تفعل؟</div>
+    <div class="modal-sub">ماذا تريد أن تفعل؟</div>
     <div class="modal-btns" style="gap:10px;">
-      <button class="mbtn mbtn-gold" onclick="doActionRev('reveal')">🔍 كشف اسم السورة</button>
-      <button class="mbtn mbtn-quran" onclick="doActionRev('read')">📜 قراءة السورة كاملة من المصحف</button>
+      <button class="mbtn mbtn-gold"  onclick="doActionRev('reveal')">🔍 كشف اسم السورة</button>
+      <button class="mbtn mbtn-quran" onclick="doActionRev('read')">📜 قراءة السورة كاملة</button>
     </div>
   </div>
 </div>
@@ -237,7 +316,7 @@
   <div class="modal">
     <span class="modal-icon">🎯</span>
     <div class="modal-title">من أجاب صح؟</div>
-    <div class="modal-sub" id="ov-assign-sub">اختر الفريق الذي أجاب بشكل صحيح</div>
+    <div class="modal-sub" id="ov-assign-sub"></div>
     <div class="modal-btns row" style="gap:10px;margin-bottom:10px;">
       <button class="mbtn mbtn-t1" id="assign-t1-btn" onclick="assignPoint(1)">الفريق الأول</button>
       <button class="mbtn mbtn-t2" id="assign-t2-btn" onclick="assignPoint(2)">الفريق الثاني</button>
@@ -246,7 +325,7 @@
   </div>
 </div>
 
-<!-- CORRECT / WRONG (individual) -->
+<!-- CORRECT / WRONG -->
 <div class="overlay hidden" id="ov-result">
   <div class="modal">
     <span class="modal-icon">🤔</span>
@@ -259,26 +338,33 @@
   </div>
 </div>
 
-<!-- QURAN IMAGE VIEWER -->
+<!-- QURAN TEXT VIEWER -->
 <div class="overlay hidden" id="ov-quran">
   <div class="quran-modal">
     <div class="quran-header">
       <div>
-        <div style="font-size:20px;font-weight:700;" id="quran-title">سورة النبأ</div>
-        <div style="font-size:13px;color:var(--text-dim);" id="quran-page-label">صفحة ١</div>
+        <div style="font-size:21px;font-weight:700;color:var(--gold);" id="quran-title">سورة النبأ</div>
+        <div style="font-size:13px;color:var(--text-dim);" id="quran-meta"></div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <button class="quran-nav-btn" id="btn-prev" onclick="quranChangePage(-1)">→ السابقة</button>
-        <button class="quran-nav-btn" id="btn-next" onclick="quranChangePage(+1)">التالية ←</button>
-        <button class="quran-close" onclick="closeQuran()">✕</button>
-      </div>
+      <button class="quran-close" onclick="closeQuran()">✕</button>
     </div>
     <div class="quran-body" id="quran-body">
-      <div id="quran-loading" style="color:var(--text-dim);font-size:18px;padding:50px;text-align:center;">جارٍ تحميل المصحف...</div>
-      <img id="quran-img" src="" alt="صفحة المصحف"
-        style="display:none;max-width:100%;border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,0.6);"
-        onload="onQuranImgLoad()"
-        onerror="onQuranImgError()" />
+      <div class="quran-loading" id="quran-loading">
+        <div class="quran-spinner"></div>
+        جارٍ تحميل السورة...
+      </div>
+      <div id="quran-content" style="display:none;">
+        <div class="quran-surah-header">
+          <h2 id="qc-name"></h2>
+          <p id="qc-meta"></p>
+        </div>
+        <div class="quran-bismillah" id="qc-bismillah">﷽</div>
+        <div class="quran-ayahs" id="qc-ayahs"></div>
+      </div>
+      <div id="quran-error" style="display:none;text-align:center;padding:40px;color:var(--red);font-size:17px;">
+        ⚠️ تعذّر تحميل السورة<br>
+        <span style="font-size:14px;color:var(--text-dim);display:block;margin-top:8px;">تأكد من الاتصال بالإنترنت</span>
+      </div>
     </div>
     <div class="quran-footer">
       <button class="mbtn mbtn-gold" style="flex:1;font-size:17px;padding:11px;" onclick="closeQuranAndContinue()">✓ تم — متابعة</button>
@@ -344,353 +430,285 @@
 </div>
 
 <script>
-// ── Surah data: num (1-37), name, quranNum (actual Quran number), pages (array of Quran page numbers) ──
 const surahs = [
-  {num:1,  name:"النبأ",      qn:78, pages:[582,583]},
-  {num:2,  name:"النازعات",   qn:79, pages:[583,584]},
-  {num:3,  name:"عبس",        qn:80, pages:[585]},
-  {num:4,  name:"التكوير",    qn:81, pages:[586]},
-  {num:5,  name:"الانفطار",   qn:82, pages:[587]},
-  {num:6,  name:"المطففين",   qn:83, pages:[587,588]},
-  {num:7,  name:"الانشقاق",   qn:84, pages:[589]},
-  {num:8,  name:"البروج",     qn:85, pages:[590]},
-  {num:9,  name:"الطارق",     qn:86, pages:[591]},
-  {num:10, name:"الأعلى",     qn:87, pages:[591]},
-  {num:11, name:"الغاشية",    qn:88, pages:[592]},
-  {num:12, name:"الفجر",      qn:89, pages:[593,594]},
-  {num:13, name:"البلد",      qn:90, pages:[594]},
-  {num:14, name:"الشمس",      qn:91, pages:[595]},
-  {num:15, name:"الليل",      qn:92, pages:[595]},
-  {num:16, name:"الضحى",      qn:93, pages:[596]},
-  {num:17, name:"الشرح",      qn:94, pages:[596]},
-  {num:18, name:"التين",      qn:95, pages:[597]},
-  {num:19, name:"العلق",      qn:96, pages:[597]},
-  {num:20, name:"القدر",      qn:97, pages:[598]},
-  {num:21, name:"البيّنة",    qn:98, pages:[598,599]},
-  {num:22, name:"الزلزلة",    qn:99, pages:[599]},
-  {num:23, name:"العاديات",   qn:100,pages:[599,600]},
-  {num:24, name:"القارعة",    qn:101,pages:[600]},
-  {num:25, name:"التكاثر",    qn:102,pages:[600]},
-  {num:26, name:"العصر",      qn:103,pages:[601]},
-  {num:27, name:"الهمزة",     qn:104,pages:[601]},
-  {num:28, name:"الفيل",      qn:105,pages:[601]},
-  {num:29, name:"قريش",       qn:106,pages:[602]},
-  {num:30, name:"الماعون",    qn:107,pages:[602]},
-  {num:31, name:"الكوثر",     qn:108,pages:[602]},
-  {num:32, name:"الكافرون",   qn:109,pages:[603]},
-  {num:33, name:"النصر",      qn:110,pages:[603]},
-  {num:34, name:"المسد",      qn:111,pages:[603]},
-  {num:35, name:"الإخلاص",    qn:112,pages:[604]},
-  {num:36, name:"الفلق",      qn:113,pages:[604]},
-  {num:37, name:"الناس",      qn:114,pages:[604]},
+  {num:1,name:"النبأ",qn:78},      {num:2,name:"النازعات",qn:79},
+  {num:3,name:"عبس",qn:80},        {num:4,name:"التكوير",qn:81},
+  {num:5,name:"الانفطار",qn:82},   {num:6,name:"المطففين",qn:83},
+  {num:7,name:"الانشقاق",qn:84},   {num:8,name:"البروج",qn:85},
+  {num:9,name:"الطارق",qn:86},     {num:10,name:"الأعلى",qn:87},
+  {num:11,name:"الغاشية",qn:88},   {num:12,name:"الفجر",qn:89},
+  {num:13,name:"البلد",qn:90},     {num:14,name:"الشمس",qn:91},
+  {num:15,name:"الليل",qn:92},     {num:16,name:"الضحى",qn:93},
+  {num:17,name:"الشرح",qn:94},     {num:18,name:"التين",qn:95},
+  {num:19,name:"العلق",qn:96},     {num:20,name:"القدر",qn:97},
+  {num:21,name:"البيّنة",qn:98},   {num:22,name:"الزلزلة",qn:99},
+  {num:23,name:"العاديات",qn:100}, {num:24,name:"القارعة",qn:101},
+  {num:25,name:"التكاثر",qn:102},  {num:26,name:"العصر",qn:103},
+  {num:27,name:"الهمزة",qn:104},   {num:28,name:"الفيل",qn:105},
+  {num:29,name:"قريش",qn:106},     {num:30,name:"الماعون",qn:107},
+  {num:31,name:"الكوثر",qn:108},   {num:32,name:"الكافرون",qn:109},
+  {num:33,name:"النصر",qn:110},    {num:34,name:"المسد",qn:111},
+  {num:35,name:"الإخلاص",qn:112},  {num:36,name:"الفلق",qn:113},
+  {num:37,name:"الناس",qn:114}
 ];
 
-let mode = null;
-let revealedSet = new Set();
-let scores = {1:0,2:0};
-let indStats = {correct:0,wrong:0};
-let pendingIdx = null;
-let quranPages = [];
-let quranPageIdx = 0;
-let quranAfterClose = null; // function to call after closing quran viewer
+// Surahs that don't start with Bismillah (Al-Tawbah only, but in Juz Amma none)
+// All Juz Amma surahs have Bismillah
 
-function ov(id)     { document.getElementById(id).classList.remove('hidden'); }
-function ovHide(id) { document.getElementById(id).classList.add('hidden'); }
+let mode=null, revealedSet=new Set(), scores={1:0,2:0}, indStats={correct:0,wrong:0};
+let pendingIdx=null, quranAfterClose=null;
+const quranCache={};
 
-// ── Mode ──
-function chooseMode(m) {
-  mode = m;
-  ovHide('ov-mode');
-  if (m === 'competition') ov('ov-teams');
-  else setupPage();
+function ov(id){document.getElementById(id).classList.remove('hidden');}
+function ovHide(id){document.getElementById(id).classList.add('hidden');}
+
+function chooseMode(m){
+  mode=m; ovHide('ov-mode');
+  if(m==='competition') ov('ov-teams'); else setupPage();
 }
+function startCompetition(){ ovHide('ov-teams'); setupPage(); }
 
-function startCompetition() {
-  ovHide('ov-teams');
-  setupPage();
-}
-
-function setupPage() {
-  const isComp = mode === 'competition';
-  document.getElementById('main-page').style.display = 'block';
-  document.getElementById('mode-badge-label').textContent = isComp ? '🏆 مسابقة' : '📝 مراجعة فردية';
-  document.getElementById('scoreboard').style.display = isComp ? 'flex' : 'none';
-  document.getElementById('ind-stats').style.display  = isComp ? 'none' : 'flex';
-  if (isComp) {
-    const n1 = document.getElementById('inp-t1').value || 'الفريق الأول';
-    const n2 = document.getElementById('inp-t2').value || 'الفريق الثاني';
-    document.getElementById('sb-t1-name').textContent = n1;
-    document.getElementById('sb-t2-name').textContent = n2;
-    document.getElementById('assign-t1-btn').textContent = n1;
-    document.getElementById('assign-t2-btn').textContent = n2;
+function setupPage(){
+  const isComp=mode==='competition';
+  document.getElementById('main-page').style.display='block';
+  document.getElementById('mode-badge-label').textContent=isComp?'🏆 مسابقة':'📝 مراجعة فردية';
+  document.getElementById('scoreboard').style.display=isComp?'flex':'none';
+  document.getElementById('ind-stats').style.display=isComp?'none':'flex';
+  if(isComp){
+    const n1=document.getElementById('inp-t1').value||'الفريق الأول';
+    const n2=document.getElementById('inp-t2').value||'الفريق الثاني';
+    document.getElementById('sb-t1-name').textContent=n1;
+    document.getElementById('sb-t2-name').textContent=n2;
+    document.getElementById('assign-t1-btn').textContent=n1;
+    document.getElementById('assign-t2-btn').textContent=n2;
   }
   buildGrid();
 }
 
-function backToModeSelect() {
+function backToModeSelect(){
   revealedSet.clear(); scores={1:0,2:0}; indStats={correct:0,wrong:0}; pendingIdx=null;
   document.getElementById('main-page').style.display='none';
   document.getElementById('complete-banner').classList.remove('show');
   ov('ov-mode');
 }
 
-// ── Grid ──
-function buildGrid() {
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  surahs.forEach((s,i) => {
-    const card = document.createElement('div');
-    card.className = 'card'; card.id = 'card-'+i;
-    card.innerHTML = `
+function buildGrid(){
+  const grid=document.getElementById('grid'); grid.innerHTML='';
+  surahs.forEach((s,i)=>{
+    const card=document.createElement('div');
+    card.className='card'; card.id='card-'+i;
+    card.innerHTML=`
       <div class="card-badge" id="badge-${i}"></div>
       <div class="card-number">${s.num}</div>
       <div class="card-hint">اضغط للبدء</div>
       <div class="card-answer">سورة ${s.name}</div>
-      <button class="card-read-btn" title="قراءة السورة" onclick="event.stopPropagation();openQuranFromCard(${i})">📜</button>
+      <button class="card-read-btn" title="قراءة السورة" onclick="event.stopPropagation();openQuran(${i},null)">📜</button>
     `;
-    card.addEventListener('click', e => onCardClick(i, card, e));
+    card.addEventListener('click',e=>onCardClick(i,card,e));
     grid.appendChild(card);
   });
   updateProgress();
 }
 
-// ── Card click → action popup ──
-function onCardClick(i, card, e) {
-  if (revealedSet.has(i)) return;
-  pendingIdx = i;
-  const s = surahs[i];
-
-  if (mode === 'competition') {
-    document.getElementById('ov-action-title').textContent = `السورة رقم ${s.num}`;
-    document.getElementById('ov-action-sub').textContent = 'ماذا تريد أن تفعل؟';
+function onCardClick(i,card,e){
+  if(revealedSet.has(i)) return;
+  pendingIdx=i;
+  const s=surahs[i];
+  if(mode==='competition'){
+    document.getElementById('ov-action-title').textContent=`السورة رقم ${s.num}`;
     ov('ov-action');
   } else {
-    document.getElementById('ov-action-rev-title').textContent = `السورة رقم ${s.num}`;
-    document.getElementById('ov-action-rev-sub').textContent = 'ماذا تريد أن تفعل؟';
+    document.getElementById('ov-action-rev-title').textContent=`السورة رقم ${s.num}`;
     ov('ov-action-rev');
   }
 }
 
-// ── Action: competition ──
-function doAction(action) {
+function doAction(action){
   ovHide('ov-action');
-  const i = pendingIdx;
-  const card = document.getElementById('card-'+i);
-
-  if (action === 'read') {
-    openQuran(i, () => {
-      // After closing quran, reveal and ask who answered
-      doRevealVisual(i, card, null, 'rpl-gold');
-      document.getElementById('ov-assign-sub').textContent = `سورة ${surahs[i].name}`;
+  const i=pendingIdx; const card=document.getElementById('card-'+i);
+  if(action==='read'){
+    openQuran(i,()=>{
+      doRevealVisual(i,card,null,'rpl-gold');
+      document.getElementById('ov-assign-sub').textContent=`سورة ${surahs[i].name}`;
       ov('ov-assign');
     });
   } else {
-    // reveal name first
-    doRevealVisual(i, card, null, 'rpl-gold');
-    document.getElementById('ov-assign-sub').textContent = `سورة ${surahs[i].name}`;
+    doRevealVisual(i,card,null,'rpl-gold');
+    document.getElementById('ov-assign-sub').textContent=`سورة ${surahs[i].name}`;
     ov('ov-assign');
   }
 }
 
-// ── Action: review ──
-function doActionRev(action) {
+function doActionRev(action){
   ovHide('ov-action-rev');
-  const i = pendingIdx;
-  const card = document.getElementById('card-'+i);
-
-  if (action === 'read') {
-    openQuran(i, () => {
-      doRevealVisual(i, card, null, 'rpl-gold');
-      document.getElementById('ov-result-num').textContent = `سورة ${surahs[i].name}`;
+  const i=pendingIdx; const card=document.getElementById('card-'+i);
+  if(action==='read'){
+    openQuran(i,()=>{
+      doRevealVisual(i,card,null,'rpl-gold');
+      document.getElementById('ov-result-num').textContent=`سورة ${surahs[i].name}`;
       ov('ov-result');
     });
   } else {
-    doRevealVisual(i, card, null, 'rpl-gold');
-    document.getElementById('ov-result-num').textContent = `سورة ${surahs[i].name}`;
+    doRevealVisual(i,card,null,'rpl-gold');
+    document.getElementById('ov-result-num').textContent=`سورة ${surahs[i].name}`;
     ov('ov-result');
   }
 }
 
-// ── Quran viewer ──
-function openQuran(idx, afterCloseFn) {
-  const s = surahs[idx];
-  quranPages = s.pages;
-  quranPageIdx = 0;
-  quranAfterClose = afterCloseFn || null;
-  document.getElementById('quran-title').textContent = `سورة ${s.name}`;
-  loadQuranPage();
+// ── Quran Viewer ──
+async function openQuran(idx, afterCloseFn){
+  const s=surahs[idx];
+  quranAfterClose=afterCloseFn||null;
+  document.getElementById('quran-title').textContent=`سورة ${s.name}`;
+  document.getElementById('quran-meta').textContent='';
+  document.getElementById('quran-loading').style.display='block';
+  document.getElementById('quran-content').style.display='none';
+  document.getElementById('quran-error').style.display='none';
+  document.getElementById('quran-body').scrollTop=0;
   ov('ov-quran');
+
+  // Fetch from cache or API
+  if(quranCache[s.qn]){
+    renderQuran(s, quranCache[s.qn]);
+    return;
+  }
+
+  try {
+    const res=await fetch(`https://api.alquran.cloud/v1/surah/${s.qn}/quran-uthmani`);
+    if(!res.ok) throw new Error('API error');
+    const data=await res.json();
+    quranCache[s.qn]=data.data;
+    renderQuran(s, data.data);
+  } catch(err){
+    document.getElementById('quran-loading').style.display='none';
+    document.getElementById('quran-error').style.display='block';
+  }
 }
 
-// Open from already-revealed card (📜 button)
-function openQuranFromCard(idx) {
-  openQuran(idx, null);
+function renderQuran(s, data){
+  document.getElementById('quran-loading').style.display='none';
+
+  // Header info
+  document.getElementById('qc-name').textContent=`سورة ${s.name}`;
+  const revelationType=data.revelationType==='Meccan'?'مكية':'مدنية';
+  document.getElementById('qc-meta').textContent=`${revelationType} — ${data.numberOfAyahs} آية`;
+  document.getElementById('quran-meta').textContent=`${revelationType} — ${data.numberOfAyahs} آية`;
+
+  // Bismillah — hide for Al-Fatiha (already has it), Tawbah
+  const showBismillah = data.number !== 1 && data.number !== 9;
+  document.getElementById('qc-bismillah').style.display=showBismillah?'block':'none';
+
+  // Render ayahs as flowing text
+  const container=document.getElementById('qc-ayahs');
+  container.innerHTML='';
+  data.ayahs.forEach(ayah=>{
+    // Skip the Bismillah that comes embedded in first ayah for some surahs
+    let text=ayah.text;
+    container.insertAdjacentHTML('beforeend',
+      `<span>${text} </span><span class="quran-ayah-num">${toArabicNum(ayah.numberInSurah)}</span> `
+    );
+  });
+
+  document.getElementById('quran-content').style.display='block';
 }
 
-function loadQuranPage() {
-  const pageNum = quranPages[quranPageIdx];
-  const total = quranPages.length;
-  document.getElementById('quran-page-label').textContent = `صفحة ${pageNum} من المصحف  (${quranPageIdx+1}/${total})`;
-  document.getElementById('btn-prev').disabled = quranPageIdx === 0;
-  document.getElementById('btn-next').disabled = quranPageIdx === total - 1;
-
-  const img = document.getElementById('quran-img');
-  const loading = document.getElementById('quran-loading');
-  img.style.display = 'none';
-  loading.style.display = 'block';
-  loading.textContent = 'جارٍ تحميل المصحف...';
-
-  // Use quran.com CDN for mushaf page images (Hafs, Medina Mushaf)
-  img.src = `https://static.qurancdn.com/images/mushaf/madani/pages/page${String(pageNum).padStart(3,'0')}.webp`;
-
-  // Scroll back to top
-  document.getElementById('quran-body').scrollTop = 0;
+function toArabicNum(n){
+  return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 }
 
-function onQuranImgLoad() {
-  document.getElementById('quran-loading').style.display = 'none';
-  document.getElementById('quran-img').style.display = 'block';
-}
+function closeQuran(){ ovHide('ov-quran'); quranAfterClose=null; }
 
-function onQuranImgError() {
-  document.getElementById('quran-loading').textContent = '⚠️ تعذّر تحميل الصورة — تأكد من الاتصال بالإنترنت';
-  document.getElementById('quran-img').style.display = 'none';
-}
-
-function quranChangePage(dir) {
-  quranPageIdx = Math.max(0, Math.min(quranPages.length-1, quranPageIdx + dir));
-  loadQuranPage();
-}
-
-function closeQuran() {
+function closeQuranAndContinue(){
   ovHide('ov-quran');
-  quranAfterClose = null;
+  const fn=quranAfterClose; quranAfterClose=null;
+  if(fn) fn();
 }
 
-function closeQuranAndContinue() {
-  ovHide('ov-quran');
-  const fn = quranAfterClose;
-  quranAfterClose = null;
-  if (fn) fn();
-}
-
-// ── Visual reveal ──
-function doRevealVisual(i, card, e, rippleClass) {
-  if (!card) card = document.getElementById('card-'+i);
-  const ripple = document.createElement('div');
-  ripple.className = 'ripple '+(rippleClass||'rpl-gold');
-  const rect = card.getBoundingClientRect();
-  const size = Math.max(rect.width, rect.height);
-  ripple.style.cssText = `width:${size}px;height:${size}px;left:${(e?e.clientX-rect.left:rect.width/2)-size/2}px;top:${(e?e.clientY-rect.top:rect.height/2)-size/2}px`;
-  card.appendChild(ripple);
-  setTimeout(()=>ripple.remove(),600);
+// ── Reveal visual ──
+function doRevealVisual(i,card,e,rippleClass){
+  if(!card) card=document.getElementById('card-'+i);
+  const ripple=document.createElement('div');
+  ripple.className='ripple '+(rippleClass||'rpl-gold');
+  const rect=card.getBoundingClientRect(); const size=Math.max(rect.width,rect.height);
+  ripple.style.cssText=`width:${size}px;height:${size}px;left:${(e?e.clientX-rect.left:rect.width/2)-size/2}px;top:${(e?e.clientY-rect.top:rect.height/2)-size/2}px`;
+  card.appendChild(ripple); setTimeout(()=>ripple.remove(),600);
   card.classList.add('revealed','pop');
 }
 
-// ── Assign point (competition) ──
-function assignPoint(team) {
+function assignPoint(team){
   ovHide('ov-assign');
-  const i = pendingIdx; pendingIdx = null;
-  const card = document.getElementById('card-'+i);
-  if (team === 0) {
-    document.getElementById('badge-'+i).textContent = '—';
+  const i=pendingIdx; pendingIdx=null; const card=document.getElementById('card-'+i);
+  if(team===0){
+    document.getElementById('badge-'+i).textContent='—';
   } else {
     card.classList.add('rev-t'+team);
-    document.getElementById('badge-'+i).textContent = document.getElementById('sb-t'+team+'-name').textContent;
-    scores[team]++;
-    bumpScore(team);
-    spawnFloat(card,'+1','t'+team);
+    document.getElementById('badge-'+i).textContent=document.getElementById('sb-t'+team+'-name').textContent;
+    scores[team]++; bumpScore(team); spawnFloat(card,'+1','t'+team);
   }
-  revealedSet.add(i);
-  updateProgress();
+  revealedSet.add(i); updateProgress();
 }
 
-function bumpScore(team) {
-  const el = document.getElementById('sb-t'+team+'-score');
-  el.textContent = scores[team];
-  el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+function bumpScore(team){
+  const el=document.getElementById('sb-t'+team+'-score');
+  el.textContent=scores[team]; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
 }
 
-// ── Record result (individual) ──
-function recordResult(correct) {
+function recordResult(correct){
   ovHide('ov-result');
-  const i = pendingIdx; pendingIdx = null;
-  const card = document.getElementById('card-'+i);
-  if (correct) {
-    card.classList.add('rev-correct');
-    document.getElementById('badge-'+i).textContent = '✓ صح';
-    indStats.correct++;
-    document.getElementById('ind-correct').textContent = indStats.correct;
+  const i=pendingIdx; pendingIdx=null; const card=document.getElementById('card-'+i);
+  if(correct){
+    card.classList.add('rev-correct'); document.getElementById('badge-'+i).textContent='✓ صح';
+    indStats.correct++; document.getElementById('ind-correct').textContent=indStats.correct;
     spawnFloat(card,'✓','correct');
   } else {
-    card.classList.add('rev-wrong');
-    document.getElementById('badge-'+i).textContent = '✗ خطأ';
-    indStats.wrong++;
-    document.getElementById('ind-wrong').textContent = indStats.wrong;
+    card.classList.add('rev-wrong'); document.getElementById('badge-'+i).textContent='✗ خطأ';
+    indStats.wrong++; document.getElementById('ind-wrong').textContent=indStats.wrong;
   }
-  revealedSet.add(i);
-  updateProgress();
+  revealedSet.add(i); updateProgress();
 }
 
-// ── Float ──
-function spawnFloat(card, text, cls) {
-  const rect = card.getBoundingClientRect();
-  const el = document.createElement('div');
-  el.className = 'float-plus '+cls;
-  el.textContent = text;
-  el.style.left = (rect.left+rect.width/2-20)+'px';
-  el.style.top  = (rect.top+rect.height/2-20)+'px';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),950);
+function spawnFloat(card,text,cls){
+  const rect=card.getBoundingClientRect();
+  const el=document.createElement('div'); el.className='float-plus '+cls; el.textContent=text;
+  el.style.left=(rect.left+rect.width/2-20)+'px'; el.style.top=(rect.top+rect.height/2-20)+'px';
+  document.body.appendChild(el); setTimeout(()=>el.remove(),950);
 }
 
-// ── Progress ──
-function updateProgress() {
-  const count = revealedSet.size, total = surahs.length;
-  document.getElementById('progress-text').textContent = `${count} من ${total} سورة`;
-  document.getElementById('progress-fill').style.width = ((count/total)*100)+'%';
-  document.getElementById('ind-remain').textContent = total-count;
-  if (count===total) showComplete();
+function updateProgress(){
+  const count=revealedSet.size, total=surahs.length;
+  document.getElementById('progress-text').textContent=`${count} من ${total} سورة`;
+  document.getElementById('progress-fill').style.width=((count/total)*100)+'%';
+  document.getElementById('ind-remain').textContent=total-count;
+  if(count===total) showComplete();
 }
 
-function showComplete() {
+function showComplete(){
   setTimeout(()=>{
     let wt,ws;
-    if (mode==='competition') {
+    if(mode==='competition'){
       const s1=scores[1],s2=scores[2];
       const n1=document.getElementById('sb-t1-name').textContent;
       const n2=document.getElementById('sb-t2-name').textContent;
       if(s1>s2){wt=`🏆 ${n1} فاز!`;ws=`${s1} مقابل ${s2} نقطة`;}
       else if(s2>s1){wt=`🏆 ${n2} فاز!`;ws=`${s2} مقابل ${s1} نقطة`;}
-      else{wt='🤝 تعادل! أحسنتم';ws=`${s1} نقطة لكل فريق`;}
-    } else {
-      wt='🌟 أتممت المراجعة!';
-      ws=`${indStats.correct} صح — ${indStats.wrong} خطأ`;
-    }
+      else{wt='🤝 تعادل!';ws=`${s1} نقطة لكل فريق`;}
+    } else { wt='🌟 أتممت المراجعة!'; ws=`${indStats.correct} صح — ${indStats.wrong} خطأ`; }
     document.getElementById('winner-text').textContent=wt;
     document.getElementById('winner-sub').textContent=ws;
-    const b=document.getElementById('complete-banner');
-    b.classList.add('show');
+    const b=document.getElementById('complete-banner'); b.classList.add('show');
     b.scrollIntoView({behavior:'smooth',block:'center'});
   },500);
 }
 
-// ── Reveal all ──
-function revealAll() {
+function revealAll(){
   surahs.forEach((_,i)=>{
     if(!revealedSet.has(i)){
-      setTimeout(()=>{
-        const card=document.getElementById('card-'+i);
-        doRevealVisual(i,card,null,'rpl-gold');
-        revealedSet.add(i);
-        updateProgress();
-      },i*35);
+      setTimeout(()=>{ const card=document.getElementById('card-'+i); doRevealVisual(i,card,null,'rpl-gold'); revealedSet.add(i); updateProgress(); },i*35);
     }
   });
 }
 
-// ── Reset ──
-function resetAll() {
+function resetAll(){
   revealedSet.clear(); scores={1:0,2:0}; indStats={correct:0,wrong:0}; pendingIdx=null;
   ['sb-t1-score','sb-t2-score'].forEach(id=>document.getElementById(id).textContent='0');
   ['ind-correct','ind-wrong'].forEach(id=>document.getElementById(id).textContent='0');
