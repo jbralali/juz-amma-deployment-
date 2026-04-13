@@ -7,271 +7,286 @@
 <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #c9a84c; --gold-dark: #8a6e2f;
-    --bg: #0d0d0e; --bg2: #141416; --bg3: #1c1c20;
-    --text: #f0e6c8; --text-dim: #8a7d62;
-    --green: #4caf7d; --red: #e85c3a;
-    --t1: #3a8fe8; --t1-glow: rgba(58,143,232,0.3);
-    --t2: #e85c3a; --t2-glow: rgba(232,92,58,0.3);
-    --shadow-gold: rgba(201,168,76,0.25);
+    --gold:#c9a84c;--gold-dark:#8a6e2f;
+    --bg:#0d0d0e;--bg2:#141416;--bg3:#1c1c20;
+    --text:#f0e6c8;--text-dim:#8a7d62;
+    --green:#4caf7d;--red:#e85c3a;
+    --t1:#3a8fe8;--t1-glow:rgba(58,143,232,0.3);
+    --t2:#e85c3a;--t2-glow:rgba(232,92,58,0.3);
+    --shadow-gold:rgba(201,168,76,0.25);
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Scheherazade New',serif; font-size:20px; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
-  body::before { content:''; position:fixed; inset:0; background-image: radial-gradient(ellipse at 20% 20%,rgba(201,168,76,0.06) 0%,transparent 50%), radial-gradient(ellipse at 80% 80%,rgba(201,168,76,0.04) 0%,transparent 50%); pointer-events:none; z-index:0; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Scheherazade New',serif;font-size:20px;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(ellipse at 20% 20%,rgba(201,168,76,0.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(201,168,76,0.04) 0%,transparent 50%);pointer-events:none;z-index:0;}
 
-  .overlay { position:fixed; inset:0; background:rgba(0,0,0,0.82); display:flex; align-items:center; justify-content:center; z-index:200; backdrop-filter:blur(6px); animation:fadeIn 0.3s ease; }
-  .overlay.hidden { display:none; }
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  /* OVERLAYS */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(6px);animation:fadeIn 0.3s ease;}
+  .overlay.hidden{display:none;}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--bg2);border:1px solid rgba(201,168,76,0.25);border-radius:24px;padding:36px 32px;max-width:440px;width:92%;text-align:center;animation:popIn 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+  @keyframes popIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
+  .modal-icon{font-size:44px;display:block;margin-bottom:12px;}
+  .modal-title{font-size:26px;font-weight:700;margin-bottom:8px;color:var(--text);}
+  .modal-sub{font-size:16px;color:var(--text-dim);margin-bottom:24px;line-height:1.6;}
+  .modal-btns{display:flex;flex-direction:column;gap:10px;}
+  .modal-btns.row{flex-direction:row;}
 
-  .modal { background:var(--bg2); border:1px solid rgba(201,168,76,0.25); border-radius:24px; padding:36px 32px; max-width:420px; width:90%; text-align:center; animation:popIn 0.35s cubic-bezier(0.34,1.56,0.64,1); }
-  @keyframes popIn { from{opacity:0;transform:scale(0.85)} to{opacity:1;transform:scale(1)} }
-  .modal-icon { font-size:44px; display:block; margin-bottom:12px; }
-  .modal-title { font-size:26px; font-weight:700; margin-bottom:8px; color:var(--text); }
-  .modal-sub { font-size:16px; color:var(--text-dim); margin-bottom:24px; line-height:1.6; }
-  .modal-btns { display:flex; flex-direction:column; gap:10px; }
-  .modal-btns.row { flex-direction:row; }
+  .mbtn{font-family:'Scheherazade New',serif;font-size:19px;padding:13px 20px;border-radius:50px;border:none;cursor:pointer;transition:all 0.2s ease;font-weight:700;}
+  .mbtn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#0d0d0e;box-shadow:0 4px 18px var(--shadow-gold);}
+  .mbtn-gold:hover{transform:translateY(-2px);}
+  .mbtn-quran{background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.05));color:var(--gold);border:2px solid rgba(201,168,76,0.35);}
+  .mbtn-quran:hover{background:rgba(201,168,76,0.18);}
+  .mbtn-t1{background:linear-gradient(135deg,rgba(58,143,232,0.2),rgba(58,143,232,0.1));color:var(--t1);border:2px solid rgba(58,143,232,0.4);flex:1;}
+  .mbtn-t1:hover{background:rgba(58,143,232,0.25);}
+  .mbtn-t2{background:linear-gradient(135deg,rgba(232,92,58,0.2),rgba(232,92,58,0.1));color:var(--t2);border:2px solid rgba(232,92,58,0.4);flex:1;}
+  .mbtn-t2:hover{background:rgba(232,92,58,0.25);}
+  .mbtn-green{background:linear-gradient(135deg,rgba(76,175,125,0.2),rgba(76,175,125,0.1));color:var(--green);border:2px solid rgba(76,175,125,0.4);flex:1;}
+  .mbtn-green:hover{background:rgba(76,175,125,0.25);}
+  .mbtn-red{background:linear-gradient(135deg,rgba(232,92,58,0.2),rgba(232,92,58,0.1));color:var(--red);border:2px solid rgba(232,92,58,0.4);flex:1;}
+  .mbtn-red:hover{background:rgba(232,92,58,0.25);}
+  .mbtn-outline{background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--text-dim);}
+  .mbtn-outline:hover{background:rgba(201,168,76,0.06);color:var(--text);}
+  .mbtn-purple{background:linear-gradient(135deg,rgba(150,100,220,0.2),rgba(150,100,220,0.1));color:#c084fc;border:2px solid rgba(150,100,220,0.4);}
+  .mbtn-purple:hover{background:rgba(150,100,220,0.25);}
 
-  .mbtn { font-family:'Scheherazade New',serif; font-size:19px; padding:13px 20px; border-radius:50px; border:none; cursor:pointer; transition:all 0.2s ease; font-weight:700; }
-  .mbtn-gold { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#0d0d0e; box-shadow:0 4px 18px var(--shadow-gold); }
-  .mbtn-gold:hover { transform:translateY(-2px); box-shadow:0 6px 24px var(--shadow-gold); }
-  .mbtn-quran { background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.05)); color:var(--gold); border:2px solid rgba(201,168,76,0.35); }
-  .mbtn-quran:hover { background:rgba(201,168,76,0.18); }
-  .mbtn-t1 { background:linear-gradient(135deg,rgba(58,143,232,0.2),rgba(58,143,232,0.1)); color:var(--t1); border:2px solid rgba(58,143,232,0.4); flex:1; }
-  .mbtn-t1:hover { background:rgba(58,143,232,0.25); }
-  .mbtn-t2 { background:linear-gradient(135deg,rgba(232,92,58,0.2),rgba(232,92,58,0.1)); color:var(--t2); border:2px solid rgba(232,92,58,0.4); flex:1; }
-  .mbtn-t2:hover { background:rgba(232,92,58,0.25); }
-  .mbtn-green { background:linear-gradient(135deg,rgba(76,175,125,0.2),rgba(76,175,125,0.1)); color:var(--green); border:2px solid rgba(76,175,125,0.4); flex:1; }
-  .mbtn-green:hover { background:rgba(76,175,125,0.25); }
-  .mbtn-red { background:linear-gradient(135deg,rgba(232,92,58,0.2),rgba(232,92,58,0.1)); color:var(--red); border:2px solid rgba(232,92,58,0.4); flex:1; }
-  .mbtn-red:hover { background:rgba(232,92,58,0.25); }
-  .mbtn-outline { background:transparent; border:1px solid rgba(201,168,76,0.3); color:var(--text-dim); }
-  .mbtn-outline:hover { background:rgba(201,168,76,0.06); color:var(--text); }
+  .team-inputs{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+  .team-input-row{display:flex;align-items:center;gap:10px;}
+  .team-input-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .t1-dot{background:var(--t1);} .t2-dot{background:var(--t2);}
+  .team-name-inp{flex:1;font-family:'Scheherazade New',serif;font-size:19px;background:var(--bg3);border:1px solid rgba(201,168,76,0.2);border-radius:10px;color:var(--text);padding:8px 14px;outline:none;text-align:right;}
+  .team-name-inp:focus{border-color:rgba(201,168,76,0.5);}
 
-  .team-inputs { display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
-  .team-input-row { display:flex; align-items:center; gap:10px; }
-  .team-input-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-  .t1-dot { background:var(--t1); } .t2-dot { background:var(--t2); }
-  .team-name-inp { flex:1; font-family:'Scheherazade New',serif; font-size:19px; background:var(--bg3); border:1px solid rgba(201,168,76,0.2); border-radius:10px; color:var(--text); padding:8px 14px; outline:none; text-align:right; }
-  .team-name-inp:focus { border-color:rgba(201,168,76,0.5); }
+  /* MAIN PAGE */
+  .page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:36px 20px 80px;}
+  .header{text-align:center;margin-bottom:28px;animation:fadeDown 0.8s ease both;}
+  .header-bismillah{font-size:28px;color:var(--gold);margin-bottom:6px;text-shadow:0 0 20px var(--shadow-gold);}
+  .header-title{font-size:38px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+  .header-sub{font-size:16px;color:var(--text-dim);}
+  .divider{display:flex;align-items:center;gap:12px;margin:12px auto 0;width:fit-content;}
+  .divider-line{width:70px;height:1px;background:linear-gradient(to left,transparent,var(--gold-dark));}
+  .divider-line.r{background:linear-gradient(to right,transparent,var(--gold-dark));}
+  .divider-diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);}
 
-  /* MAIN */
-  .page { position:relative; z-index:1; max-width:980px; margin:0 auto; padding:36px 20px 80px; }
-  .header { text-align:center; margin-bottom:28px; animation:fadeDown 0.8s ease both; }
-  .header-bismillah { font-size:28px; color:var(--gold); margin-bottom:6px; text-shadow:0 0 20px var(--shadow-gold); }
-  .header-title { font-size:38px; font-weight:700; line-height:1.3; margin-bottom:4px; }
-  .header-sub { font-size:16px; color:var(--text-dim); }
-  .divider { display:flex; align-items:center; gap:12px; margin:12px auto 0; width:fit-content; }
-  .divider-line { width:70px; height:1px; background:linear-gradient(to left,transparent,var(--gold-dark)); }
-  .divider-line.r { background:linear-gradient(to right,transparent,var(--gold-dark)); }
-  .divider-diamond { width:8px; height:8px; background:var(--gold); transform:rotate(45deg); }
+  .mode-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid rgba(201,168,76,0.2);border-radius:50px;padding:6px 18px;font-size:15px;color:var(--text-dim);margin-bottom:20px;cursor:pointer;transition:all 0.2s;}
+  .mode-badge:hover{border-color:rgba(201,168,76,0.4);color:var(--text);}
+  .mode-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
 
-  .mode-badge { display:inline-flex; align-items:center; gap:8px; background:var(--bg3); border:1px solid rgba(201,168,76,0.2); border-radius:50px; padding:6px 18px; font-size:15px; color:var(--text-dim); margin-bottom:20px; cursor:pointer; transition:all 0.2s; }
-  .mode-badge:hover { border-color:rgba(201,168,76,0.4); color:var(--text); }
-  .mode-badge-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); }
+  /* SCOREBOARD */
+  .scoreboard{display:flex;align-items:stretch;margin-bottom:22px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+  .team-panel{flex:1;padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:5px;}
+  .team1-panel{background:linear-gradient(135deg,rgba(58,143,232,0.15),rgba(58,143,232,0.05));border-left:1px solid rgba(255,255,255,0.06);}
+  .team2-panel{background:linear-gradient(135deg,rgba(232,92,58,0.15),rgba(232,92,58,0.05));}
+  .tp-name{font-size:18px;font-weight:700;}
+  .t1 .tp-name{color:var(--t1);} .t2 .tp-name{color:var(--t2);}
+  .tp-score{font-size:50px;font-weight:700;line-height:1;}
+  .t1 .tp-score{color:var(--t1);text-shadow:0 0 20px var(--t1-glow);}
+  .t2 .tp-score{color:var(--t2);text-shadow:0 0 20px var(--t2-glow);}
+  .tp-score.bump{animation:scoreBump 0.35s ease;}
+  @keyframes scoreBump{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+  .tp-label{font-size:12px;color:var(--text-dim);}
+  .score-vs{display:flex;align-items:center;justify-content:center;padding:14px 10px;background:var(--bg3);font-size:13px;color:var(--text-dim);min-width:44px;}
 
-  .scoreboard { display:flex; align-items:stretch; margin-bottom:22px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.06); }
-  .team-panel { flex:1; padding:18px 14px; display:flex; flex-direction:column; align-items:center; gap:5px; }
-  .team1-panel { background:linear-gradient(135deg,rgba(58,143,232,0.15),rgba(58,143,232,0.05)); border-left:1px solid rgba(255,255,255,0.06); }
-  .team2-panel { background:linear-gradient(135deg,rgba(232,92,58,0.15),rgba(232,92,58,0.05)); }
-  .tp-name { font-size:18px; font-weight:700; }
-  .t1 .tp-name { color:var(--t1); } .t2 .tp-name { color:var(--t2); }
-  .tp-score { font-size:50px; font-weight:700; line-height:1; }
-  .t1 .tp-score { color:var(--t1); text-shadow:0 0 20px var(--t1-glow); }
-  .t2 .tp-score { color:var(--t2); text-shadow:0 0 20px var(--t2-glow); }
-  .tp-score.bump { animation:scoreBump 0.35s ease; }
-  @keyframes scoreBump { 0%{transform:scale(1)} 50%{transform:scale(1.4)} 100%{transform:scale(1)} }
-  .tp-label { font-size:12px; color:var(--text-dim); }
-  .score-vs { display:flex; align-items:center; justify-content:center; padding:14px 10px; background:var(--bg3); font-size:13px; color:var(--text-dim); min-width:44px; }
+  /* IND STATS */
+  .ind-stats{display:flex;justify-content:center;gap:20px;margin-bottom:22px;}
+  .ind-pill{background:var(--bg3);border:1px solid rgba(201,168,76,0.18);border-radius:50px;padding:8px 22px;display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .ind-pill-label{font-size:12px;color:var(--text-dim);}
+  .ind-pill-val{font-size:22px;font-weight:700;}
+  .ind-pill-val.correct{color:var(--green);} .ind-pill-val.wrong{color:var(--red);} .ind-pill-val.gold{color:var(--gold);}
 
-  .ind-stats { display:flex; justify-content:center; gap:20px; margin-bottom:22px; }
-  .ind-pill { background:var(--bg3); border:1px solid rgba(201,168,76,0.18); border-radius:50px; padding:8px 22px; display:flex; flex-direction:column; align-items:center; gap:2px; }
-  .ind-pill-label { font-size:12px; color:var(--text-dim); }
-  .ind-pill-val { font-size:22px; font-weight:700; }
-  .ind-pill-val.correct { color:var(--green); } .ind-pill-val.wrong { color:var(--red); } .ind-pill-val.gold { color:var(--gold); }
+  /* PROGRESS */
+  .progress-wrap{margin-bottom:16px;}
+  .progress-text{font-size:14px;color:var(--text-dim);text-align:center;margin-bottom:6px;}
+  .progress-bar{height:4px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(to left,var(--gold),var(--gold-dark));border-radius:4px;transition:width 0.4s ease;}
 
-  .progress-wrap { margin-bottom:16px; }
-  .progress-text { font-size:14px; color:var(--text-dim); text-align:center; margin-bottom:6px; }
-  .progress-bar { height:4px; background:var(--bg3); border-radius:4px; overflow:hidden; }
-  .progress-fill { height:100%; background:linear-gradient(to left,var(--gold),var(--gold-dark)); border-radius:4px; transition:width 0.4s ease; }
+  /* CONTROLS */
+  .controls{display:flex;justify-content:center;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+  .btn{font-family:'Scheherazade New',serif;font-size:17px;padding:9px 22px;border-radius:50px;border:none;cursor:pointer;transition:all 0.2s ease;}
+  .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#0d0d0e;font-weight:700;box-shadow:0 4px 18px var(--shadow-gold);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-outline{background:transparent;border:1px solid rgba(201,168,76,0.35);color:var(--gold);}
+  .btn-outline:hover{background:rgba(201,168,76,0.08);}
 
-  .controls { display:flex; justify-content:center; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
-  .btn { font-family:'Scheherazade New',serif; font-size:17px; padding:9px 22px; border-radius:50px; border:none; cursor:pointer; transition:all 0.2s ease; }
-  .btn-primary { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#0d0d0e; font-weight:700; box-shadow:0 4px 18px var(--shadow-gold); }
-  .btn-primary:hover { transform:translateY(-2px); }
-  .btn-outline { background:transparent; border:1px solid rgba(201,168,76,0.35); color:var(--gold); }
-  .btn-outline:hover { background:rgba(201,168,76,0.08); }
+  /* GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:13px;animation:fadeUp 0.8s 0.3s ease both;}
+  .card{position:relative;background:var(--bg3);border:1px solid rgba(201,168,76,0.15);border-radius:16px;padding:16px 12px;cursor:pointer;transition:all 0.3s ease;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:108px;justify-content:center;overflow:hidden;}
+  .card::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,rgba(201,168,76,0.05),transparent);opacity:0;transition:opacity 0.3s;}
+  .card:hover:not(.revealed){border-color:rgba(201,168,76,0.45);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.3);}
+  .card:hover::before{opacity:1;}
+  .card-number{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dark),var(--gold));display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#0d0d0e;flex-shrink:0;transition:transform 0.3s;}
+  .card:hover .card-number{transform:scale(1.1);}
+  .card-answer{text-align:center;font-size:20px;color:var(--text);line-height:1.4;transform:scale(0.7);opacity:0;transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);max-height:0;overflow:hidden;}
+  .card-hint{font-size:13px;color:var(--text-dim);transition:opacity 0.2s;}
+  .card-badge{position:absolute;top:7px;left:8px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;opacity:0;transition:opacity 0.3s;white-space:nowrap;}
+  .card-read-btn{position:absolute;bottom:7px;left:8px;font-size:15px;cursor:pointer;opacity:0;transition:opacity 0.3s;background:none;border:none;color:var(--gold);padding:2px;line-height:1;}
+  .card.revealed .card-read-btn{opacity:0.55;} .card.revealed .card-read-btn:hover{opacity:1;}
+  .card.revealed{cursor:default;transform:none !important;}
+  .card.revealed .card-answer{opacity:1;transform:scale(1);max-height:100px;}
+  .card.revealed .card-hint{opacity:0;max-height:0;overflow:hidden;}
+  .card.revealed .card-badge{opacity:1;}
+  .card.rev-t1{border-color:rgba(58,143,232,0.45);background:linear-gradient(135deg,rgba(58,143,232,0.1),var(--bg3));}
+  .card.rev-t1 .card-number{background:linear-gradient(135deg,#1a5fa8,var(--t1));}
+  .card.rev-t1 .card-badge{background:rgba(58,143,232,0.2);color:var(--t1);border:1px solid rgba(58,143,232,0.3);}
+  .card.rev-t2{border-color:rgba(232,92,58,0.45);background:linear-gradient(135deg,rgba(232,92,58,0.1),var(--bg3));}
+  .card.rev-t2 .card-number{background:linear-gradient(135deg,#a83218,var(--t2));}
+  .card.rev-t2 .card-badge{background:rgba(232,92,58,0.2);color:var(--t2);border:1px solid rgba(232,92,58,0.3);}
+  .card.rev-correct{border-color:rgba(76,175,125,0.45);background:linear-gradient(135deg,rgba(76,175,125,0.1),var(--bg3));}
+  .card.rev-correct .card-number{background:linear-gradient(135deg,#2d8a5e,var(--green));}
+  .card.rev-correct .card-badge{background:rgba(76,175,125,0.2);color:var(--green);border:1px solid rgba(76,175,125,0.3);}
+  .card.rev-wrong{border-color:rgba(232,92,58,0.35);background:linear-gradient(135deg,rgba(232,92,58,0.07),var(--bg3));}
+  .card.rev-wrong .card-number{background:linear-gradient(135deg,#a83218,var(--red));}
+  .card.rev-wrong .card-badge{background:rgba(232,92,58,0.15);color:var(--red);border:1px solid rgba(232,92,58,0.3);}
 
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:13px; animation:fadeUp 0.8s 0.3s ease both; }
-
-  .card { position:relative; background:var(--bg3); border:1px solid rgba(201,168,76,0.15); border-radius:16px; padding:16px 12px; cursor:pointer; transition:all 0.3s ease; display:flex; flex-direction:column; align-items:center; gap:8px; min-height:108px; justify-content:center; overflow:hidden; }
-  .card::before { content:''; position:absolute; inset:0; border-radius:16px; background:linear-gradient(135deg,rgba(201,168,76,0.05),transparent); opacity:0; transition:opacity 0.3s; }
-  .card:hover:not(.revealed) { border-color:rgba(201,168,76,0.45); transform:translateY(-3px); box-shadow:0 8px 28px rgba(0,0,0,0.3); }
-  .card:hover::before { opacity:1; }
-  .card-number { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--gold-dark),var(--gold)); display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700; color:#0d0d0e; flex-shrink:0; transition:transform 0.3s; }
-  .card:hover .card-number { transform:scale(1.1); }
-  .card-answer { text-align:center; font-size:20px; color:var(--text); line-height:1.4; transform:scale(0.7); opacity:0; transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1); max-height:0; overflow:hidden; }
-  .card-hint { font-size:13px; color:var(--text-dim); transition:opacity 0.2s; }
-  .card-badge { position:absolute; top:7px; left:8px; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; opacity:0; transition:opacity 0.3s; white-space:nowrap; }
-  .card-read-btn { position:absolute; bottom:7px; left:8px; font-size:15px; cursor:pointer; opacity:0; transition:opacity 0.3s; background:none; border:none; color:var(--gold); padding:2px; line-height:1; }
-  .card.revealed .card-read-btn { opacity:0.55; }
-  .card.revealed .card-read-btn:hover { opacity:1; }
-
-  .card.revealed { cursor:default; transform:none !important; }
-  .card.revealed .card-answer { opacity:1; transform:scale(1); max-height:100px; }
-  .card.revealed .card-hint { opacity:0; max-height:0; overflow:hidden; }
-  .card.revealed .card-badge { opacity:1; }
-
-  .card.rev-t1 { border-color:rgba(58,143,232,0.45); background:linear-gradient(135deg,rgba(58,143,232,0.1),var(--bg3)); }
-  .card.rev-t1 .card-number { background:linear-gradient(135deg,#1a5fa8,var(--t1)); }
-  .card.rev-t1 .card-badge { background:rgba(58,143,232,0.2); color:var(--t1); border:1px solid rgba(58,143,232,0.3); }
-  .card.rev-t2 { border-color:rgba(232,92,58,0.45); background:linear-gradient(135deg,rgba(232,92,58,0.1),var(--bg3)); }
-  .card.rev-t2 .card-number { background:linear-gradient(135deg,#a83218,var(--t2)); }
-  .card.rev-t2 .card-badge { background:rgba(232,92,58,0.2); color:var(--t2); border:1px solid rgba(232,92,58,0.3); }
-  .card.rev-correct { border-color:rgba(76,175,125,0.45); background:linear-gradient(135deg,rgba(76,175,125,0.1),var(--bg3)); }
-  .card.rev-correct .card-number { background:linear-gradient(135deg,#2d8a5e,var(--green)); }
-  .card.rev-correct .card-badge { background:rgba(76,175,125,0.2); color:var(--green); border:1px solid rgba(76,175,125,0.3); }
-  .card.rev-wrong { border-color:rgba(232,92,58,0.35); background:linear-gradient(135deg,rgba(232,92,58,0.07),var(--bg3)); }
-  .card.rev-wrong .card-number { background:linear-gradient(135deg,#a83218,var(--red)); }
-  .card.rev-wrong .card-badge { background:rgba(232,92,58,0.15); color:var(--red); border:1px solid rgba(232,92,58,0.3); }
-
-  .ripple { position:absolute; border-radius:50%; transform:scale(0); animation:ripple-anim 0.55s linear; pointer-events:none; }
-  .rpl-gold{background:rgba(201,168,76,0.3);} .rpl-t1{background:rgba(58,143,232,0.3);} .rpl-t2{background:rgba(232,92,58,0.3);}
-  @keyframes ripple-anim { to{transform:scale(4);opacity:0} }
-
-  .float-plus { position:fixed; font-size:32px; font-weight:700; pointer-events:none; z-index:999; animation:floatUp 0.9s ease forwards; }
+  /* RIPPLE / FLOAT */
+  .ripple{position:absolute;border-radius:50%;transform:scale(0);animation:ripple-anim 0.55s linear;pointer-events:none;}
+  .rpl-gold{background:rgba(201,168,76,0.3);}.rpl-t1{background:rgba(58,143,232,0.3);}.rpl-t2{background:rgba(232,92,58,0.3);}
+  @keyframes ripple-anim{to{transform:scale(4);opacity:0}}
+  .float-plus{position:fixed;font-size:32px;font-weight:700;pointer-events:none;z-index:999;animation:floatUp 0.9s ease forwards;}
   .float-plus.t1{color:var(--t1);} .float-plus.t2{color:var(--t2);} .float-plus.correct{color:var(--green);}
-  @keyframes floatUp { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-75px) scale(1.3)} }
+  @keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-75px) scale(1.3)}}
 
-  .complete-banner { display:none; text-align:center; padding:28px; background:linear-gradient(135deg,rgba(76,175,125,0.12),rgba(201,168,76,0.08)); border:1px solid rgba(76,175,125,0.3); border-radius:20px; margin-bottom:26px; }
-  .complete-banner.show { display:block; animation:fadeDown 0.6s ease both; }
-  .complete-banner .emoji { font-size:36px; display:block; margin-bottom:8px; }
-  .complete-banner h2 { font-size:26px; color:var(--green); margin-bottom:4px; }
-  .complete-banner p { font-size:16px; color:var(--text-dim); }
+  /* COMPLETE */
+  .complete-banner{display:none;text-align:center;padding:28px;background:linear-gradient(135deg,rgba(76,175,125,0.12),rgba(201,168,76,0.08));border:1px solid rgba(76,175,125,0.3);border-radius:20px;margin-bottom:26px;}
+  .complete-banner.show{display:block;animation:fadeDown 0.6s ease both;}
+  .complete-banner .emoji{font-size:36px;display:block;margin-bottom:8px;}
+  .complete-banner h2{font-size:26px;color:var(--green);margin-bottom:4px;}
+  .complete-banner p{font-size:16px;color:var(--text-dim);}
 
-  /* ── QURAN TEXT VIEWER ── */
-  .quran-modal {
-    background:var(--bg2);
-    border:1px solid rgba(201,168,76,0.25);
-    border-radius:24px;
-    width:96%; max-width:660px;
-    max-height:92vh;
-    display:flex; flex-direction:column;
-    overflow:hidden;
-    animation:popIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .quran-header {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 20px;
-    border-bottom:1px solid rgba(255,255,255,0.06);
-    flex-shrink:0;
-  }
-  .quran-close { font-size:22px; background:none; border:none; color:var(--text-dim); cursor:pointer; padding:4px 8px; line-height:1; }
-  .quran-close:hover { color:var(--text); }
+  /* QURAN VIEWER */
+  .quran-modal{background:var(--bg2);border:1px solid rgba(201,168,76,0.25);border-radius:24px;width:96%;max-width:660px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;animation:popIn 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+  .quran-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
+  .quran-close{font-size:22px;background:none;border:none;color:var(--text-dim);cursor:pointer;padding:4px 8px;line-height:1;}
+  .quran-close:hover{color:var(--text);}
+  .quran-body{flex:1;overflow-y:auto;padding:24px 28px;background:linear-gradient(180deg,#0f0c06 0%,#0d0b05 100%);}
+  .quran-bismillah{text-align:center;font-size:28px;color:var(--gold);margin-bottom:20px;text-shadow:0 0 14px var(--shadow-gold);}
+  .quran-surah-header{text-align:center;margin-bottom:20px;padding:14px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:12px;}
+  .quran-surah-header h2{font-size:24px;color:var(--gold);margin-bottom:4px;}
+  .quran-surah-header p{font-size:13px;color:var(--text-dim);}
+  .quran-ayahs{font-size:26px;line-height:2.4;text-align:justify;color:#f5e8c0;direction:rtl;}
+  .quran-ayah-num{display:inline-block;width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);font-size:13px;text-align:center;line-height:26px;color:var(--gold);margin:0 4px;vertical-align:middle;}
+  .quran-loading{text-align:center;padding:50px 20px;color:var(--text-dim);font-size:18px;}
+  .quran-spinner{width:36px;height:36px;border:3px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .quran-footer{padding:12px 20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;gap:10px;flex-shrink:0;}
 
-  .quran-body {
-    flex:1; overflow-y:auto;
-    padding:24px 28px;
-    background: linear-gradient(180deg, #0f0c06 0%, #0d0b05 100%);
-  }
+  /* ══ GUESS MODE PAGE ══ */
+  #guess-page{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:30px 20px 80px;display:none;}
 
-  /* Bismillah */
-  .quran-bismillah {
-    text-align:center;
-    font-size:28px;
-    color:var(--gold);
-    margin-bottom:20px;
-    text-shadow:0 0 14px var(--shadow-gold);
-    letter-spacing:1px;
-  }
+  .guess-header{text-align:center;margin-bottom:24px;}
+  .guess-progress-row{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--text-dim);margin-bottom:8px;}
+  .guess-bar{height:6px;background:var(--bg3);border-radius:6px;overflow:hidden;margin-bottom:24px;}
+  .guess-bar-fill{height:100%;background:linear-gradient(to left,#c084fc,#7c3aed);border-radius:6px;transition:width 0.4s ease;}
 
-  /* Surah name header */
-  .quran-surah-header {
-    text-align:center;
-    margin-bottom:20px;
-    padding:14px;
-    background:rgba(201,168,76,0.06);
-    border:1px solid rgba(201,168,76,0.15);
-    border-radius:12px;
-  }
-  .quran-surah-header h2 { font-size:24px; color:var(--gold); margin-bottom:4px; }
-  .quran-surah-header p  { font-size:13px; color:var(--text-dim); }
+  /* Team turn indicator */
+  .guess-turn{text-align:center;margin-bottom:16px;font-size:17px;color:var(--text-dim);}
+  .guess-turn span{font-weight:700;}
+  .guess-turn.t1 span{color:var(--t1);} .guess-turn.t2 span{color:var(--t2);}
 
-  /* Ayahs container — flowing text like Quran */
-  .quran-ayahs {
-    font-size:26px;
-    line-height:2.4;
-    text-align:justify;
-    color: #f5e8c0;
-    direction:rtl;
-  }
+  /* Scoreboard for guess mode */
+  .guess-scoreboard{display:flex;gap:0;margin-bottom:20px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+  .gs-panel{flex:1;padding:12px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .gs-panel.t1p{background:linear-gradient(135deg,rgba(58,143,232,0.15),rgba(58,143,232,0.05));border-left:1px solid rgba(255,255,255,0.06);}
+  .gs-panel.t2p{background:linear-gradient(135deg,rgba(232,92,58,0.15),rgba(232,92,58,0.05));}
+  .gs-name{font-size:15px;font-weight:700;}
+  .gs-score{font-size:34px;font-weight:700;line-height:1;}
+  .gs-panel.t1p .gs-name,.gs-panel.t1p .gs-score{color:var(--t1);}
+  .gs-panel.t2p .gs-name,.gs-panel.t2p .gs-score{color:var(--t2);}
+  .gs-score.bump{animation:scoreBump 0.35s ease;}
+  .gs-vs{display:flex;align-items:center;justify-content:center;padding:10px 8px;background:var(--bg3);font-size:12px;color:var(--text-dim);min-width:36px;}
 
-  .quran-ayah-num {
-    display:inline-block;
-    width:28px; height:28px;
-    border-radius:50%;
-    background:rgba(201,168,76,0.15);
-    border:1px solid rgba(201,168,76,0.3);
-    font-size:13px;
-    text-align:center;
-    line-height:26px;
-    color:var(--gold);
-    margin: 0 4px;
-    vertical-align:middle;
-    flex-shrink:0;
-  }
+  /* Ind stats for guess mode */
+  .guess-ind-stats{display:flex;justify-content:center;gap:16px;margin-bottom:18px;}
 
-  .quran-loading {
-    text-align:center;
-    padding:50px 20px;
-    color:var(--text-dim);
-    font-size:18px;
-  }
-  .quran-spinner {
-    width:36px; height:36px;
-    border:3px solid rgba(201,168,76,0.2);
-    border-top-color:var(--gold);
-    border-radius:50%;
-    animation:spin 0.8s linear infinite;
-    margin:0 auto 16px;
-  }
-  @keyframes spin { to{transform:rotate(360deg)} }
+  /* Ayah card */
+  .ayah-card{background:var(--bg2);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:28px 24px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;}
+  .ayah-card::before{content:'﴿';position:absolute;top:10px;right:18px;font-size:40px;color:rgba(201,168,76,0.08);line-height:1;}
+  .ayah-card::after{content:'﴾';position:absolute;bottom:10px;left:18px;font-size:40px;color:rgba(201,168,76,0.08);line-height:1;}
+  .ayah-label{font-size:13px;color:var(--text-dim);margin-bottom:14px;letter-spacing:1px;}
+  .ayah-text{font-size:28px;line-height:2;color:var(--text);direction:rtl;}
+  .ayah-dots{font-size:20px;color:var(--gold);opacity:0.6;margin:0 4px;}
 
-  .quran-footer {
-    padding:12px 20px;
-    border-top:1px solid rgba(255,255,255,0.06);
-    display:flex; gap:10px;
-    flex-shrink:0;
-  }
+  /* Choice buttons */
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+  .choice-btn{font-family:'Scheherazade New',serif;font-size:20px;padding:16px 12px;border-radius:14px;border:2px solid rgba(201,168,76,0.2);background:var(--bg3);color:var(--text);cursor:pointer;transition:all 0.2s;text-align:center;position:relative;overflow:hidden;}
+  .choice-btn:hover:not(:disabled){border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.06);transform:translateY(-2px);}
+  .choice-btn.correct{border-color:var(--green)!important;background:rgba(76,175,125,0.15)!important;color:var(--green)!important;animation:correctPop 0.4s ease;}
+  .choice-btn.wrong{border-color:var(--red)!important;background:rgba(232,92,58,0.12)!important;color:var(--red)!important;}
+  .choice-btn.reveal{border-color:var(--green)!important;background:rgba(76,175,125,0.08)!important;}
+  .choice-btn:disabled{cursor:default;}
+  @keyframes correctPop{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
 
-  @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeUp   { from{opacity:0;transform:translateY(20px)}  to{opacity:1;transform:translateY(0)} }
-  @keyframes cardReveal { 0%{transform:scale(0.93)} 60%{transform:scale(1.04)} 100%{transform:scale(1)} }
-  .card.pop { animation:cardReveal 0.35s ease both; }
+  /* Feedback bar */
+  .guess-feedback{text-align:center;font-size:18px;min-height:30px;margin-bottom:16px;transition:all 0.3s;}
+  .guess-feedback.ok{color:var(--green);}
+  .guess-feedback.no{color:var(--red);}
 
-  @media (max-width:520px) {
-    .grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; }
-    .header-title { font-size:30px; } .tp-score { font-size:38px; }
-    .modal { padding:28px 20px; } .modal-btns.row { flex-direction:column; }
-    .quran-ayahs { font-size:22px; }
+  /* Next button */
+  .guess-next{display:none;width:100%;}
+
+  /* Guess complete */
+  .guess-complete{display:none;text-align:center;padding:32px 24px;background:linear-gradient(135deg,rgba(150,100,220,0.1),rgba(201,168,76,0.06));border:1px solid rgba(150,100,220,0.3);border-radius:20px;margin-top:20px;}
+  .guess-complete.show{display:block;animation:fadeDown 0.5s ease both;}
+  .guess-complete h2{font-size:28px;color:#c084fc;margin-bottom:8px;}
+  .guess-complete p{font-size:17px;color:var(--text-dim);}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes cardReveal{0%{transform:scale(0.93)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+  .card.pop{animation:cardReveal 0.35s ease both;}
+
+  @media(max-width:520px){
+    .grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+    .header-title{font-size:30px;}.tp-score{font-size:38px;}
+    .modal{padding:28px 20px;}.modal-btns.row{flex-direction:column;}
+    .choices{grid-template-columns:1fr;}
+    .ayah-text{font-size:24px;}
+    .quran-ayahs{font-size:22px;}
   }
 </style>
 </head>
 <body>
 
-<!-- MODE SELECT -->
-<div class="overlay" id="ov-mode">
+<!-- ══ HOME ══ -->
+<div class="overlay" id="ov-home">
   <div class="modal">
     <span class="modal-icon">📖</span>
     <div class="modal-title">مسابقة جزء عمّ</div>
     <div class="modal-sub">اختر نوع الجلسة</div>
     <div class="modal-btns">
-      <button class="mbtn mbtn-gold" onclick="chooseMode('competition')">🏆 مسابقة بين فريقين</button>
-      <button class="mbtn mbtn-outline" onclick="chooseMode('review')">📝 مراجعة فردية</button>
+      <button class="mbtn mbtn-gold"   onclick="startFlow('surah-names')">📋 أسماء السور</button>
+      <button class="mbtn mbtn-purple" onclick="startFlow('guess-surah')">🔍 خمّن السورة من الآية</button>
     </div>
   </div>
 </div>
 
-<!-- TEAM NAMES -->
+<!-- ══ MODE SELECT (solo/team) shared ══ -->
+<div class="overlay hidden" id="ov-mode">
+  <div class="modal">
+    <span class="modal-icon" id="ov-mode-icon">📋</span>
+    <div class="modal-title" id="ov-mode-title">اختر وضع اللعب</div>
+    <div class="modal-sub" id="ov-mode-sub"></div>
+    <div class="modal-btns">
+      <button class="mbtn mbtn-gold"   onclick="choosePlayerMode('solo')">👤 فردي</button>
+      <button class="mbtn mbtn-outline" onclick="choosePlayerMode('team')">👥 فريقين</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QUESTION COUNT (guess mode) ══ -->
+<div class="overlay hidden" id="ov-qcount">
+  <div class="modal">
+    <span class="modal-icon">🔢</span>
+    <div class="modal-title">عدد الأسئلة</div>
+    <div class="modal-sub">اختر عدد الأسئلة لهذه الجولة</div>
+    <div class="modal-btns" style="gap:10px;">
+      <button class="mbtn mbtn-gold"    onclick="setQCount(10)">١٠ أسئلة</button>
+      <button class="mbtn mbtn-outline" onclick="setQCount(15)">١٥ سؤالاً</button>
+      <button class="mbtn mbtn-outline" onclick="setQCount(20)">٢٠ سؤالاً</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TEAM NAMES ══ -->
 <div class="overlay hidden" id="ov-teams">
   <div class="modal">
     <span class="modal-icon">✏️</span>
@@ -281,11 +296,11 @@
       <div class="team-input-row"><div class="team-input-dot t1-dot"></div><input class="team-name-inp" id="inp-t1" value="الفريق الأول" maxlength="18"/></div>
       <div class="team-input-row"><div class="team-input-dot t2-dot"></div><input class="team-name-inp" id="inp-t2" value="الفريق الثاني" maxlength="18"/></div>
     </div>
-    <div class="modal-btns"><button class="mbtn mbtn-gold" onclick="startCompetition()">ابدأ المسابقة</button></div>
+    <div class="modal-btns"><button class="mbtn mbtn-gold" onclick="confirmTeams()">ابدأ</button></div>
   </div>
 </div>
 
-<!-- CARD ACTION — competition -->
+<!-- ══ CARD ACTION (surah-names competition) ══ -->
 <div class="overlay hidden" id="ov-action">
   <div class="modal">
     <span class="modal-icon">🕌</span>
@@ -294,11 +309,12 @@
     <div class="modal-btns" style="gap:10px;">
       <button class="mbtn mbtn-gold"  onclick="doAction('reveal')">🔍 كشف اسم السورة</button>
       <button class="mbtn mbtn-quran" onclick="doAction('read')">📜 قراءة السورة كاملة</button>
+      <button class="mbtn mbtn-outline" onclick="cancelAction()">← رجوع</button>
     </div>
   </div>
 </div>
 
-<!-- CARD ACTION — review -->
+<!-- ══ CARD ACTION (surah-names review) ══ -->
 <div class="overlay hidden" id="ov-action-rev">
   <div class="modal">
     <span class="modal-icon">🕌</span>
@@ -307,11 +323,12 @@
     <div class="modal-btns" style="gap:10px;">
       <button class="mbtn mbtn-gold"  onclick="doActionRev('reveal')">🔍 كشف اسم السورة</button>
       <button class="mbtn mbtn-quran" onclick="doActionRev('read')">📜 قراءة السورة كاملة</button>
+      <button class="mbtn mbtn-outline" onclick="cancelActionRev()">← رجوع</button>
     </div>
   </div>
 </div>
 
-<!-- ASSIGN POINT -->
+<!-- ══ ASSIGN POINT ══ -->
 <div class="overlay hidden" id="ov-assign">
   <div class="modal">
     <span class="modal-icon">🎯</span>
@@ -325,7 +342,7 @@
   </div>
 </div>
 
-<!-- CORRECT / WRONG -->
+<!-- ══ CORRECT/WRONG (surah names solo) ══ -->
 <div class="overlay hidden" id="ov-result">
   <div class="modal">
     <span class="modal-icon">🤔</span>
@@ -338,7 +355,7 @@
   </div>
 </div>
 
-<!-- QURAN TEXT VIEWER -->
+<!-- ══ QURAN VIEWER ══ -->
 <div class="overlay hidden" id="ov-quran">
   <div class="quran-modal">
     <div class="quran-header">
@@ -349,22 +366,13 @@
       <button class="quran-close" onclick="closeQuran()">✕</button>
     </div>
     <div class="quran-body" id="quran-body">
-      <div class="quran-loading" id="quran-loading">
-        <div class="quran-spinner"></div>
-        جارٍ تحميل السورة...
-      </div>
+      <div class="quran-loading" id="quran-loading"><div class="quran-spinner"></div>جارٍ تحميل السورة...</div>
       <div id="quran-content" style="display:none;">
-        <div class="quran-surah-header">
-          <h2 id="qc-name"></h2>
-          <p id="qc-meta"></p>
-        </div>
+        <div class="quran-surah-header"><h2 id="qc-name"></h2><p id="qc-meta"></p></div>
         <div class="quran-bismillah" id="qc-bismillah">﷽</div>
         <div class="quran-ayahs" id="qc-ayahs"></div>
       </div>
-      <div id="quran-error" style="display:none;text-align:center;padding:40px;color:var(--red);font-size:17px;">
-        ⚠️ تعذّر تحميل السورة<br>
-        <span style="font-size:14px;color:var(--text-dim);display:block;margin-top:8px;">تأكد من الاتصال بالإنترنت</span>
-      </div>
+      <div id="quran-error" style="display:none;text-align:center;padding:40px;color:var(--red);font-size:17px;">⚠️ تعذّر تحميل السورة<br><span style="font-size:14px;color:var(--text-dim);display:block;margin-top:8px;">تأكد من الاتصال بالإنترنت</span></div>
     </div>
     <div class="quran-footer">
       <button class="mbtn mbtn-gold" style="flex:1;font-size:17px;padding:11px;" onclick="closeQuranAndContinue()">✓ تم — متابعة</button>
@@ -373,7 +381,9 @@
   </div>
 </div>
 
-<!-- MAIN PAGE -->
+<!-- ══════════════════════════════════════
+     SURAH NAMES PAGE
+══════════════════════════════════════ -->
 <div class="page" id="main-page" style="display:none">
   <div class="header">
     <div class="header-bismillah">﷽</div>
@@ -381,55 +391,101 @@
     <p class="header-sub">اضغط على رقم السورة للبدء</p>
     <div class="divider"><div class="divider-line r"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
   </div>
-
   <div style="text-align:center;margin-bottom:18px;">
-    <div class="mode-badge" onclick="backToModeSelect()">
-      <div class="mode-badge-dot"></div>
-      <span id="mode-badge-label">مسابقة</span>
-      <span style="font-size:12px;opacity:0.5">← تغيير</span>
-    </div>
+    <div class="mode-badge" onclick="goHome()"><div class="mode-badge-dot"></div><span id="mode-badge-label">مسابقة</span><span style="font-size:12px;opacity:0.5">← رجوع</span></div>
   </div>
-
   <div class="scoreboard" id="scoreboard">
-    <div class="team-panel team1-panel t1">
-      <div class="tp-name" id="sb-t1-name">الفريق الأول</div>
-      <div class="tp-score" id="sb-t1-score">0</div>
-      <div class="tp-label">نقطة</div>
-    </div>
+    <div class="team-panel team1-panel t1"><div class="tp-name" id="sb-t1-name">الفريق الأول</div><div class="tp-score" id="sb-t1-score">0</div><div class="tp-label">نقطة</div></div>
     <div class="score-vs">VS</div>
-    <div class="team-panel team2-panel t2">
-      <div class="tp-name" id="sb-t2-name">الفريق الثاني</div>
-      <div class="tp-score" id="sb-t2-score">0</div>
-      <div class="tp-label">نقطة</div>
-    </div>
+    <div class="team-panel team2-panel t2"><div class="tp-name" id="sb-t2-name">الفريق الثاني</div><div class="tp-score" id="sb-t2-score">0</div><div class="tp-label">نقطة</div></div>
   </div>
-
   <div class="ind-stats" id="ind-stats">
     <div class="ind-pill"><div class="ind-pill-label">صح</div><div class="ind-pill-val correct" id="ind-correct">0</div></div>
     <div class="ind-pill"><div class="ind-pill-label">خطأ</div><div class="ind-pill-val wrong" id="ind-wrong">0</div></div>
     <div class="ind-pill"><div class="ind-pill-label">المتبقية</div><div class="ind-pill-val gold" id="ind-remain">37</div></div>
   </div>
-
   <div class="progress-wrap">
     <div class="progress-text" id="progress-text">0 من 37 سورة</div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
   </div>
-
   <div class="controls">
     <button class="btn btn-primary" onclick="revealAll()">كشف الكل</button>
     <button class="btn btn-outline" onclick="resetAll()">إعادة التهيئة</button>
   </div>
-
   <div class="complete-banner" id="complete-banner">
-    <span class="emoji">🌙</span>
-    <h2 id="winner-text">أحسنتم!</h2>
-    <p id="winner-sub"></p>
+    <span class="emoji">🌙</span><h2 id="winner-text">أحسنتم!</h2><p id="winner-sub"></p>
   </div>
-
   <div class="grid" id="grid"></div>
 </div>
 
+<!-- ══════════════════════════════════════
+     GUESS THE SURAH PAGE
+══════════════════════════════════════ -->
+<div id="guess-page">
+  <div class="guess-header">
+    <div class="header-bismillah" style="font-size:22px;color:var(--gold);text-shadow:0 0 14px var(--shadow-gold);margin-bottom:6px;">﷽</div>
+    <h1 style="font-size:30px;font-weight:700;margin-bottom:4px;">خمّن السورة</h1>
+    <p style="font-size:15px;color:var(--text-dim);">من أي سورة هذه الآية؟</p>
+    <div style="text-align:center;margin-top:10px;">
+      <div class="mode-badge" onclick="goHome()"><div class="mode-badge-dot" style="background:#c084fc;"></div><span id="guess-mode-label">فردي</span><span style="font-size:12px;opacity:0.5">← رجوع</span></div>
+    </div>
+  </div>
+
+  <!-- Scoreboard for team guess mode -->
+  <div class="guess-scoreboard" id="guess-scoreboard" style="display:none;">
+    <div class="gs-panel t1p"><div class="gs-name" id="gs-t1-name">الفريق الأول</div><div class="gs-score" id="gs-t1-score">0</div></div>
+    <div class="gs-vs">VS</div>
+    <div class="gs-panel t2p"><div class="gs-name" id="gs-t2-name">الفريق الثاني</div><div class="gs-score" id="gs-t2-score">0</div></div>
+  </div>
+
+  <!-- Solo stats for guess mode -->
+  <div class="guess-ind-stats" id="guess-ind-stats">
+    <div class="ind-pill"><div class="ind-pill-label">صح</div><div class="ind-pill-val correct" id="g-correct">0</div></div>
+    <div class="ind-pill"><div class="ind-pill-label">خطأ</div><div class="ind-pill-val wrong" id="g-wrong">0</div></div>
+    <div class="ind-pill"><div class="ind-pill-label">المتبقية</div><div class="ind-pill-val gold" id="g-remain">0</div></div>
+    <div class="ind-pill"><div class="ind-pill-label">الإجمالي</div><div class="ind-pill-val gold" id="g-total-count">0</div></div>
+  </div>
+
+  <!-- Team turn -->
+  <div class="guess-turn hidden" id="guess-turn">دور: <span id="guess-turn-name">الفريق الأول</span></div>
+
+  <!-- Progress -->
+  <div class="guess-progress-row">
+    <span id="guess-q-label">السؤال ١</span>
+    <span id="guess-q-total"></span>
+  </div>
+  <div class="guess-bar"><div class="guess-bar-fill" id="guess-bar-fill" style="width:0%"></div></div>
+
+  <!-- Ayah display -->
+  <div class="ayah-card">
+    <div class="ayah-label">من أي سورة هذه الآيات؟</div>
+    <div class="ayah-text" id="ayah-text">...</div>
+  </div>
+
+  <!-- 5 choices -->
+  <div class="choices" id="choices-grid"></div>
+
+  <!-- Feedback -->
+  <div class="guess-feedback" id="guess-feedback"></div>
+
+  <!-- Next -->
+  <button class="mbtn mbtn-gold guess-next" id="guess-next-btn" onclick="nextQuestion()">التالي →</button>
+
+  <!-- Complete -->
+  <div class="guess-complete" id="guess-complete">
+    <h2 id="gc-title">🎉 انتهت الجولة!</h2>
+    <p id="gc-sub"></p>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;">
+      <button class="mbtn mbtn-purple" style="font-size:17px;padding:11px 22px;" onclick="restartGuess()">🔄 جولة جديدة</button>
+      <button class="mbtn mbtn-outline" style="font-size:17px;padding:11px 22px;" onclick="goHome()">🏠 الرئيسية</button>
+    </div>
+  </div>
+</div>
+
 <script>
+/* ════════════════════════════════════════
+   DATA
+════════════════════════════════════════ */
 const surahs = [
   {num:1,name:"النبأ",qn:78},      {num:2,name:"النازعات",qn:79},
   {num:3,name:"عبس",qn:80},        {num:4,name:"التكوير",qn:81},
@@ -452,25 +508,132 @@ const surahs = [
   {num:37,name:"الناس",qn:114}
 ];
 
-// Surahs that don't start with Bismillah (Al-Tawbah only, but in Juz Amma none)
-// All Juz Amma surahs have Bismillah
+// Ayah bank — 3+ unique ayahs per surah (partial text, distinctive)
+const ayahBank = {
+  78:[{t:"عَمَّ يَتَسَاءَلُونَ ۝ عَنِ النَّبَإِ الْعَظِيمِ"},{t:"إِنَّ يَوْمَ الْفَصْلِ كَانَ مِيقَاتًا"},{t:"وَجَاءَ رَبُّكَ وَالْمَلَكُ صَفًّا صَفًّا"},{t:"إِنَّ جَهَنَّمَ كَانَتْ مِرْصَادًا"}],
+  79:[{t:"وَالنَّازِعَاتِ غَرْقًا ۝ وَالنَّاشِطَاتِ نَشْطًا"},{t:"يَوْمَ تَرْجُفُ الرَّاجِفَةُ ۝ تَتْبَعُهَا الرَّادِفَةُ"},{t:"هَلْ أَتَاكَ حَدِيثُ مُوسَىٰ"},{t:"فَأَمَّا مَن طَغَىٰ ۝ وَآثَرَ الْحَيَاةَ الدُّنْيَا"}],
+  80:[{t:"عَبَسَ وَتَوَلَّىٰ ۝ أَن جَاءَهُ الْأَعْمَىٰ"},{t:"فَمَن شَاءَ ذَكَرَهُ ۝ فِي صُحُفٍ مُّكَرَّمَةٍ"},{t:"قُتِلَ الْإِنسَانُ مَا أَكْفَرَهُ"},{t:"ثُمَّ السَّبِيلَ يَسَّرَهُ"}],
+  81:[{t:"إِذَا الشَّمْسُ كُوِّرَتْ ۝ وَإِذَا النُّجُومُ انكَدَرَتْ"},{t:"عَلِمَتْ نَفْسٌ مَّا أَحْضَرَتْ"},{t:"وَمَا هُوَ عَلَى الْغَيْبِ بِضَنِينٍ"},{t:"إِنْ هُوَ إِلَّا ذِكْرٌ لِّلْعَالَمِينَ"}],
+  82:[{t:"إِذَا السَّمَاءُ انفَطَرَتْ ۝ وَإِذَا الْكَوَاكِبُ انتَثَرَتْ"},{t:"وَإِنَّ عَلَيْكُمْ لَحَافِظِينَ ۝ كِرَامًا كَاتِبِينَ"},{t:"إِنَّ الْأَبْرَارَ لَفِي نَعِيمٍ ۝ وَإِنَّ الْفُجَّارَ لَفِي جَحِيمٍ"},{t:"يَوْمَ لَا تَمْلِكُ نَفْسٌ لِّنَفْسٍ شَيْئًا"}],
+  83:[{t:"وَيْلٌ لِّلْمُطَفِّفِينَ ۝ الَّذِينَ إِذَا اكْتَالُوا عَلَى النَّاسِ يَسْتَوْفُونَ"},{t:"كَلَّا إِنَّ كِتَابَ الْفُجَّارِ لَفِي سِجِّينٍ"},{t:"إِنَّ الَّذِينَ أَجْرَمُوا كَانُوا مِنَ الَّذِينَ آمَنُوا يَضْحَكُونَ"},{t:"فَالْيَوْمَ الَّذِينَ آمَنُوا مِنَ الْكُفَّارِ يَضْحَكُونَ"}],
+  84:[{t:"إِذَا السَّمَاءُ انشَقَّتْ ۝ وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ"},{t:"يَا أَيُّهَا الْإِنسَانُ إِنَّكَ كَادِحٌ إِلَىٰ رَبِّكَ كَدْحًا"},{t:"فَأَمَّا مَنْ أُوتِيَ كِتَابَهُ بِيَمِينِهِ"},{t:"وَإِذَا قُرِئَ عَلَيْهِمُ الْقُرْآنُ لَا يَسْجُدُونَ"}],
+  85:[{t:"وَالسَّمَاءِ ذَاتِ الْبُرُوجِ ۝ وَالْيَوْمِ الْمَوْعُودِ"},{t:"قُتِلَ أَصْحَابُ الْأُخْدُودِ ۝ النَّارِ ذَاتِ الْوَقُودِ"},{t:"إِنَّ الَّذِينَ فَتَنُوا الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ"},{t:"إِنَّ بَطْشَ رَبِّكَ لَشَدِيدٌ"}],
+  86:[{t:"وَالسَّمَاءِ وَالطَّارِقِ ۝ وَمَا أَدْرَاكَ مَا الطَّارِقُ"},{t:"النَّجْمُ الثَّاقِبُ"},{t:"إِنَّهُ لَقَوْلٌ فَصْلٌ ۝ وَمَا هُوَ بِالْهَزْلِ"},{t:"فَمَهِّلِ الْكَافِرِينَ أَمْهِلْهُمْ رُوَيْدًا"}],
+  87:[{t:"سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى ۝ الَّذِي خَلَقَ فَسَوَّىٰ"},{t:"سَنُقْرِئُكَ فَلَا تَنسَىٰ"},{t:"قَدْ أَفْلَحَ مَن تَزَكَّىٰ ۝ وَذَكَرَ اسْمَ رَبِّهِ فَصَلَّىٰ"},{t:"إِنَّ هَٰذَا لَفِي الصُّحُفِ الْأُولَىٰ ۝ صُحُفِ إِبْرَاهِيمَ وَمُوسَىٰ"}],
+  88:[{t:"هَلْ أَتَاكَ حَدِيثُ الْغَاشِيَةِ"},{t:"وُجُوهٌ يَوْمَئِذٍ خَاشِعَةٌ ۝ عَامِلَةٌ نَّاصِبَةٌ"},{t:"فِيهَا عَيْنٌ جَارِيَةٌ"},{t:"أَفَلَا يَنظُرُونَ إِلَى الْإِبِلِ كَيْفَ خُلِقَتْ"}],
+  89:[{t:"وَالْفَجْرِ ۝ وَلَيَالٍ عَشْرٍ"},{t:"أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِعَادٍ"},{t:"يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ ۝ ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً"},{t:"فَأَمَّا الْإِنسَانُ إِذَا مَا ابْتَلَاهُ رَبُّهُ فَأَكْرَمَهُ"}],
+  90:[{t:"لَا أُقْسِمُ بِهَٰذَا الْبَلَدِ"},{t:"لَقَدْ خَلَقْنَا الْإِنسَانَ فِي كَبَدٍ"},{t:"فَلَا اقْتَحَمَ الْعَقَبَةَ ۝ وَمَا أَدْرَاكَ مَا الْعَقَبَةُ"},{t:"فَكُّ رَقَبَةٍ ۝ أَوْ إِطْعَامٌ فِي يَوْمٍ ذِي مَسْغَبَةٍ"}],
+  91:[{t:"وَالشَّمْسِ وَضُحَاهَا ۝ وَالْقَمَرِ إِذَا تَلَاهَا"},{t:"قَدْ أَفْلَحَ مَن زَكَّاهَا ۝ وَقَدْ خَابَ مَن دَسَّاهَا"},{t:"كَذَّبَتْ ثَمُودُ بِطَغْوَاهَا"},{t:"فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنبِهِمْ فَسَوَّاهَا"}],
+  92:[{t:"وَاللَّيْلِ إِذَا يَغْشَىٰ ۝ وَالنَّهَارِ إِذَا تَجَلَّىٰ"},{t:"إِنَّ سَعْيَكُمْ لَشَتَّىٰ"},{t:"فَأَمَّا مَنْ أَعْطَىٰ وَاتَّقَىٰ ۝ وَصَدَّقَ بِالْحُسْنَىٰ"},{t:"وَسَيُجَنَّبُهَا الْأَتْقَى ۝ الَّذِي يُؤْتِي مَالَهُ يَتَزَكَّىٰ"}],
+  93:[{t:"وَالضُّحَىٰ ۝ وَاللَّيْلِ إِذَا سَجَىٰ"},{t:"مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ"},{t:"أَلَمْ يَجِدْكَ يَتِيمًا فَآوَىٰ"},{t:"وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ"}],
+  94:[{t:"أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ"},{t:"وَوَضَعْنَا عَنكَ وِزْرَكَ ۝ الَّذِي أَنقَضَ ظَهْرَكَ"},{t:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا"},{t:"فَإِذَا فَرَغْتَ فَانصَبْ ۝ وَإِلَىٰ رَبِّكَ فَارْغَبْ"}],
+  95:[{t:"وَالتِّينِ وَالزَّيْتُونِ ۝ وَطُورِ سِينِينَ"},{t:"لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ"},{t:"ثُمَّ رَدَدْنَاهُ أَسْفَلَ سَافِلِينَ"},{t:"أَلَيْسَ اللَّهُ بِأَحْكَمِ الْحَاكِمِينَ"}],
+  96:[{t:"اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ"},{t:"عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ"},{t:"كَلَّا إِنَّ الْإِنسَانَ لَيَطْغَىٰ ۝ أَن رَّآهُ اسْتَغْنَىٰ"},{t:"كَلَّا لَا تُطِعْهُ وَاسْجُدْ وَاقْتَرِبْ"}],
+  97:[{t:"إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ"},{t:"لَيْلَةُ الْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ"},{t:"تَنَزَّلُ الْمَلَائِكَةُ وَالرُّوحُ فِيهَا"},{t:"سَلَامٌ هِيَ حَتَّىٰ مَطْلَعِ الْفَجْرِ"}],
+  98:[{t:"لَمْ يَكُنِ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ وَالْمُشْرِكِينَ مُنفَكِّينَ"},{t:"رَسُولٌ مِّنَ اللَّهِ يَتْلُو صُحُفًا مُّطَهَّرَةً"},{t:"وَمَا أُمِرُوا إِلَّا لِيَعْبُدُوا اللَّهَ مُخْلِصِينَ لَهُ الدِّينَ"},{t:"إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أُولَٰئِكَ هُمْ خَيْرُ الْبَرِيَّةِ"}],
+  99:[{t:"إِذَا زُلْزِلَتِ الْأَرْضُ زِلْزَالَهَا"},{t:"وَأَخْرَجَتِ الْأَرْضُ أَثْقَالَهَا"},{t:"يَوْمَئِذٍ تُحَدِّثُ أَخْبَارَهَا"},{t:"فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ ۝ وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ"}],
+  100:[{t:"وَالْعَادِيَاتِ ضَبْحًا ۝ فَالْمُورِيَاتِ قَدْحًا"},{t:"إِنَّ الْإِنسَانَ لِرَبِّهِ لَكَنُودٌ"},{t:"أَفَلَا يَعْلَمُ إِذَا بُعْثِرَ مَا فِي الْقُبُورِ"},{t:"وَحُصِّلَ مَا فِي الصُّدُورِ"}],
+  101:[{t:"الْقَارِعَةُ ۝ مَا الْقَارِعَةُ ۝ وَمَا أَدْرَاكَ مَا الْقَارِعَةُ"},{t:"يَوْمَ يَكُونُ النَّاسُ كَالْفَرَاشِ الْمَبْثُوثِ"},{t:"وَتَكُونُ الْجِبَالُ كَالْعِهْنِ الْمَنفُوشِ"},{t:"فَأُمُّهُ هَاوِيَةٌ"}],
+  102:[{t:"أَلْهَاكُمُ التَّكَاثُرُ ۝ حَتَّىٰ زُرْتُمُ الْمَقَابِرَ"},{t:"كَلَّا سَوْفَ تَعْلَمُونَ ۝ ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ"},{t:"ثُمَّ لَتُسْأَلُنَّ يَوْمَئِذٍ عَنِ النَّعِيمِ"},{t:"كَلَّا لَوْ تَعْلَمُونَ عِلْمَ الْيَقِينِ ۝ لَتَرَوُنَّ الْجَحِيمَ"}],
+  103:[{t:"وَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ"},{t:"إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ"},{t:"وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ"}],
+  104:[{t:"وَيْلٌ لِّكُلِّ هُمَزَةٍ لُّمَزَةٍ"},{t:"الَّذِي جَمَعَ مَالًا وَعَدَّدَهُ"},{t:"كَلَّا لَيُنبَذَنَّ فِي الْحُطَمَةِ ۝ وَمَا أَدْرَاكَ مَا الْحُطَمَةُ"},{t:"نَارُ اللَّهِ الْمُوقَدَةُ ۝ الَّتِي تَطَّلِعُ عَلَى الْأَفْئِدَةِ"}],
+  105:[{t:"أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ"},{t:"أَلَمْ يَجْعَلْ كَيْدَهُمْ فِي تَضْلِيلٍ"},{t:"وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ"},{t:"فَجَعَلَهُمْ كَعَصْفٍ مَّأْكُولٍ"}],
+  106:[{t:"لِإِيلَافِ قُرَيْشٍ ۝ إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ"},{t:"فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ"},{t:"الَّذِي أَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ"}],
+  107:[{t:"أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ"},{t:"فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ ۝ وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ"},{t:"فَوَيْلٌ لِّلْمُصَلِّينَ ۝ الَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ"},{t:"وَيَمْنَعُونَ الْمَاعُونَ"}],
+  108:[{t:"إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ"},{t:"فَصَلِّ لِرَبِّكَ وَانْحَرْ"},{t:"إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ"}],
+  109:[{t:"قُلْ يَا أَيُّهَا الْكَافِرُونَ ۝ لَا أَعْبُدُ مَا تَعْبُدُونَ"},{t:"وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ"},{t:"لَكُمْ دِينُكُمْ وَلِيَ دِينِ"}],
+  110:[{t:"إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ"},{t:"وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا"},{t:"فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُ كَانَ تَوَّابًا"}],
+  111:[{t:"تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ"},{t:"مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ"},{t:"سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ"},{t:"وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ ۝ فِي جِيدِهَا حَبْلٌ مِّن مَّسَدٍ"}],
+  112:[{t:"قُلْ هُوَ اللَّهُ أَحَدٌ"},{t:"اللَّهُ الصَّمَدُ"},{t:"لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ"}],
+  113:[{t:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ"},{t:"وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ"},{t:"وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ"},{t:"وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ"}],
+  114:[{t:"قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ"},{t:"مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ"},{t:"الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ"}]
+};
 
-let mode=null, revealedSet=new Set(), scores={1:0,2:0}, indStats={correct:0,wrong:0};
+/* ════════════════════════════════════════
+   GLOBAL STATE
+════════════════════════════════════════ */
+let currentFlow=null;   // 'surah-names' | 'guess-surah'
+let playerMode=null;    // 'solo' | 'team'
+let snMode=null;        // surah-names: 'competition'|'review'
+let revealedSet=new Set(), scores={1:0,2:0}, indStats={correct:0,wrong:0};
 let pendingIdx=null, quranAfterClose=null;
 const quranCache={};
 
+// Guess mode state
+let gQueue=[];       // shuffled question indices
+let gUsed=[];        // used (surahIdx, ayahIdx) pairs to avoid repeats
+let gCurrent=0;      // current question index in queue
+let gScores={1:0,2:0};
+let gInd={correct:0,wrong:0};
+let gActiveTurn=1;   // 1 or 2
+let gAnswered=false;
+let gQCount=10;        // chosen question count
+
+/* ════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════ */
 function ov(id){document.getElementById(id).classList.remove('hidden');}
 function ovHide(id){document.getElementById(id).classList.add('hidden');}
+function show(id){document.getElementById(id).style.display='block';}
+function hide(id){document.getElementById(id).style.display='none';}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-function chooseMode(m){
-  mode=m; ovHide('ov-mode');
-  if(m==='competition') ov('ov-teams'); else setupPage();
+/* ════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════ */
+function goHome(){
+  hide('main-page'); hide('guess-page');
+  ov('ov-home');
+  // reset
+  revealedSet.clear(); scores={1:0,2:0}; indStats={correct:0,wrong:0}; pendingIdx=null;
+  gQueue=[]; gUsed=[]; gCurrent=0; gScores={1:0,2:0}; gInd={correct:0,wrong:0};
+  document.getElementById('complete-banner').classList.remove('show');
 }
-function startCompetition(){ ovHide('ov-teams'); setupPage(); }
 
-function setupPage(){
-  const isComp=mode==='competition';
-  document.getElementById('main-page').style.display='block';
+function startFlow(flow){
+  currentFlow=flow;
+  ovHide('ov-home');
+  // Show mode picker
+  if(flow==='surah-names'){
+    document.getElementById('ov-mode-icon').textContent='📋';
+    document.getElementById('ov-mode-title').textContent='أسماء السور';
+    document.getElementById('ov-mode-sub').textContent='كيف تريد اللعب؟';
+  } else {
+    document.getElementById('ov-mode-icon').textContent='🔍';
+    document.getElementById('ov-mode-title').textContent='خمّن السورة';
+    document.getElementById('ov-mode-sub').textContent='كيف تريد اللعب؟';
+  }
+  ov('ov-mode');
+}
+
+function choosePlayerMode(pm){
+  playerMode=pm; ovHide('ov-mode');
+  if(currentFlow==='guess-surah'){
+    // Show question count picker first
+    ov('ov-qcount');
+  } else {
+    if(pm==='team') ov('ov-teams'); else confirmTeams();
+  }
+}
+
+function setQCount(n){
+  gQCount=n; ovHide('ov-qcount');
+  if(playerMode==='team') ov('ov-teams'); else confirmTeams();
+}
+
+function confirmTeams(){
+  ovHide('ov-teams');
+  if(currentFlow==='surah-names') setupSurahNames();
+  else setupGuessMode();
+}
+
+/* ════════════════════════════════════════
+   SURAH NAMES MODE
+════════════════════════════════════════ */
+function setupSurahNames(){
+  snMode = playerMode==='team' ? 'competition' : 'review';
+  const isComp=snMode==='competition';
+  show('main-page');
   document.getElementById('mode-badge-label').textContent=isComp?'🏆 مسابقة':'📝 مراجعة فردية';
   document.getElementById('scoreboard').style.display=isComp?'flex':'none';
   document.getElementById('ind-stats').style.display=isComp?'none':'flex';
@@ -483,13 +646,6 @@ function setupPage(){
     document.getElementById('assign-t2-btn').textContent=n2;
   }
   buildGrid();
-}
-
-function backToModeSelect(){
-  revealedSet.clear(); scores={1:0,2:0}; indStats={correct:0,wrong:0}; pendingIdx=null;
-  document.getElementById('main-page').style.display='none';
-  document.getElementById('complete-banner').classList.remove('show');
-  ov('ov-mode');
 }
 
 function buildGrid(){
@@ -514,7 +670,7 @@ function onCardClick(i,card,e){
   if(revealedSet.has(i)) return;
   pendingIdx=i;
   const s=surahs[i];
-  if(mode==='competition'){
+  if(snMode==='competition'){
     document.getElementById('ov-action-title').textContent=`السورة رقم ${s.num}`;
     ov('ov-action');
   } else {
@@ -555,84 +711,14 @@ function doActionRev(action){
   }
 }
 
-// ── Quran Viewer ──
-async function openQuran(idx, afterCloseFn){
-  const s=surahs[idx];
-  quranAfterClose=afterCloseFn||null;
-  document.getElementById('quran-title').textContent=`سورة ${s.name}`;
-  document.getElementById('quran-meta').textContent='';
-  document.getElementById('quran-loading').style.display='block';
-  document.getElementById('quran-content').style.display='none';
-  document.getElementById('quran-error').style.display='none';
-  document.getElementById('quran-body').scrollTop=0;
-  ov('ov-quran');
-
-  // Fetch from cache or API
-  if(quranCache[s.qn]){
-    renderQuran(s, quranCache[s.qn]);
-    return;
-  }
-
-  try {
-    const res=await fetch(`https://api.alquran.cloud/v1/surah/${s.qn}/quran-uthmani`);
-    if(!res.ok) throw new Error('API error');
-    const data=await res.json();
-    quranCache[s.qn]=data.data;
-    renderQuran(s, data.data);
-  } catch(err){
-    document.getElementById('quran-loading').style.display='none';
-    document.getElementById('quran-error').style.display='block';
-  }
+function cancelAction(){
+  ovHide('ov-action');
+  pendingIdx=null;
 }
 
-function renderQuran(s, data){
-  document.getElementById('quran-loading').style.display='none';
-
-  // Header info
-  document.getElementById('qc-name').textContent=`سورة ${s.name}`;
-  const revelationType=data.revelationType==='Meccan'?'مكية':'مدنية';
-  document.getElementById('qc-meta').textContent=`${revelationType} — ${data.numberOfAyahs} آية`;
-  document.getElementById('quran-meta').textContent=`${revelationType} — ${data.numberOfAyahs} آية`;
-
-  // Bismillah — hide for Al-Fatiha (already has it), Tawbah
-  const showBismillah = data.number !== 1 && data.number !== 9;
-  document.getElementById('qc-bismillah').style.display=showBismillah?'block':'none';
-
-  // Render ayahs as flowing text
-  const container=document.getElementById('qc-ayahs');
-  container.innerHTML='';
-  data.ayahs.forEach(ayah=>{
-    // Skip the Bismillah that comes embedded in first ayah for some surahs
-    let text=ayah.text;
-    container.insertAdjacentHTML('beforeend',
-      `<span>${text} </span><span class="quran-ayah-num">${toArabicNum(ayah.numberInSurah)}</span> `
-    );
-  });
-
-  document.getElementById('quran-content').style.display='block';
-}
-
-function toArabicNum(n){
-  return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
-}
-
-function closeQuran(){ ovHide('ov-quran'); quranAfterClose=null; }
-
-function closeQuranAndContinue(){
-  ovHide('ov-quran');
-  const fn=quranAfterClose; quranAfterClose=null;
-  if(fn) fn();
-}
-
-// ── Reveal visual ──
-function doRevealVisual(i,card,e,rippleClass){
-  if(!card) card=document.getElementById('card-'+i);
-  const ripple=document.createElement('div');
-  ripple.className='ripple '+(rippleClass||'rpl-gold');
-  const rect=card.getBoundingClientRect(); const size=Math.max(rect.width,rect.height);
-  ripple.style.cssText=`width:${size}px;height:${size}px;left:${(e?e.clientX-rect.left:rect.width/2)-size/2}px;top:${(e?e.clientY-rect.top:rect.height/2)-size/2}px`;
-  card.appendChild(ripple); setTimeout(()=>ripple.remove(),600);
-  card.classList.add('revealed','pop');
+function cancelActionRev(){
+  ovHide('ov-action-rev');
+  pendingIdx=null;
 }
 
 function assignPoint(team){
@@ -667,32 +753,25 @@ function recordResult(correct){
   revealedSet.add(i); updateProgress();
 }
 
-function spawnFloat(card,text,cls){
-  const rect=card.getBoundingClientRect();
-  const el=document.createElement('div'); el.className='float-plus '+cls; el.textContent=text;
-  el.style.left=(rect.left+rect.width/2-20)+'px'; el.style.top=(rect.top+rect.height/2-20)+'px';
-  document.body.appendChild(el); setTimeout(()=>el.remove(),950);
-}
-
 function updateProgress(){
-  const count=revealedSet.size, total=surahs.length;
+  const count=revealedSet.size,total=surahs.length;
   document.getElementById('progress-text').textContent=`${count} من ${total} سورة`;
   document.getElementById('progress-fill').style.width=((count/total)*100)+'%';
   document.getElementById('ind-remain').textContent=total-count;
-  if(count===total) showComplete();
+  if(count===total) showSnComplete();
 }
 
-function showComplete(){
+function showSnComplete(){
   setTimeout(()=>{
     let wt,ws;
-    if(mode==='competition'){
+    if(snMode==='competition'){
       const s1=scores[1],s2=scores[2];
       const n1=document.getElementById('sb-t1-name').textContent;
       const n2=document.getElementById('sb-t2-name').textContent;
       if(s1>s2){wt=`🏆 ${n1} فاز!`;ws=`${s1} مقابل ${s2} نقطة`;}
       else if(s2>s1){wt=`🏆 ${n2} فاز!`;ws=`${s2} مقابل ${s1} نقطة`;}
       else{wt='🤝 تعادل!';ws=`${s1} نقطة لكل فريق`;}
-    } else { wt='🌟 أتممت المراجعة!'; ws=`${indStats.correct} صح — ${indStats.wrong} خطأ`; }
+    } else {wt='🌟 أتممت المراجعة!';ws=`${indStats.correct} صح — ${indStats.wrong} خطأ`;}
     document.getElementById('winner-text').textContent=wt;
     document.getElementById('winner-sub').textContent=ws;
     const b=document.getElementById('complete-banner'); b.classList.add('show');
@@ -703,7 +782,7 @@ function showComplete(){
 function revealAll(){
   surahs.forEach((_,i)=>{
     if(!revealedSet.has(i)){
-      setTimeout(()=>{ const card=document.getElementById('card-'+i); doRevealVisual(i,card,null,'rpl-gold'); revealedSet.add(i); updateProgress(); },i*35);
+      setTimeout(()=>{const card=document.getElementById('card-'+i);doRevealVisual(i,card,null,'rpl-gold');revealedSet.add(i);updateProgress();},i*35);
     }
   });
 }
@@ -714,6 +793,242 @@ function resetAll(){
   ['ind-correct','ind-wrong'].forEach(id=>document.getElementById(id).textContent='0');
   document.getElementById('complete-banner').classList.remove('show');
   buildGrid();
+}
+
+function doRevealVisual(i,card,e,rippleClass){
+  if(!card) card=document.getElementById('card-'+i);
+  const ripple=document.createElement('div');
+  ripple.className='ripple '+(rippleClass||'rpl-gold');
+  const rect=card.getBoundingClientRect(); const size=Math.max(rect.width,rect.height);
+  ripple.style.cssText=`width:${size}px;height:${size}px;left:${(e?e.clientX-rect.left:rect.width/2)-size/2}px;top:${(e?e.clientY-rect.top:rect.height/2)-size/2}px`;
+  card.appendChild(ripple); setTimeout(()=>ripple.remove(),600);
+  card.classList.add('revealed','pop');
+}
+
+function spawnFloat(card,text,cls){
+  const rect=card.getBoundingClientRect();
+  const el=document.createElement('div'); el.className='float-plus '+cls; el.textContent=text;
+  el.style.left=(rect.left+rect.width/2-20)+'px'; el.style.top=(rect.top+rect.height/2-20)+'px';
+  document.body.appendChild(el); setTimeout(()=>el.remove(),950);
+}
+
+/* ════════════════════════════════════════
+   QURAN VIEWER
+════════════════════════════════════════ */
+async function openQuran(idx,afterCloseFn){
+  const s=surahs[idx]; quranAfterClose=afterCloseFn||null;
+  document.getElementById('quran-title').textContent=`سورة ${s.name}`;
+  document.getElementById('quran-meta').textContent='';
+  document.getElementById('quran-loading').style.display='block';
+  document.getElementById('quran-content').style.display='none';
+  document.getElementById('quran-error').style.display='none';
+  document.getElementById('quran-body').scrollTop=0;
+  ov('ov-quran');
+  if(quranCache[s.qn]){renderQuran(s,quranCache[s.qn]);return;}
+  try{
+    const res=await fetch(`https://api.alquran.cloud/v1/surah/${s.qn}/quran-uthmani`);
+    if(!res.ok) throw new Error();
+    const data=await res.json(); quranCache[s.qn]=data.data; renderQuran(s,data.data);
+  }catch{document.getElementById('quran-loading').style.display='none';document.getElementById('quran-error').style.display='block';}
+}
+
+function renderQuran(s,data){
+  document.getElementById('quran-loading').style.display='none';
+  const rt=data.revelationType==='Meccan'?'مكية':'مدنية';
+  document.getElementById('qc-name').textContent=`سورة ${s.name}`;
+  document.getElementById('qc-meta').textContent=`${rt} — ${data.numberOfAyahs} آية`;
+  document.getElementById('quran-meta').textContent=`${rt} — ${data.numberOfAyahs} آية`;
+  document.getElementById('qc-bismillah').style.display=(data.number!==1&&data.number!==9)?'block':'none';
+  const container=document.getElementById('qc-ayahs'); container.innerHTML='';
+  data.ayahs.forEach(ayah=>{
+    container.insertAdjacentHTML('beforeend',`<span>${ayah.text} </span><span class="quran-ayah-num">${toArabicNum(ayah.numberInSurah)}</span> `);
+  });
+  document.getElementById('quran-content').style.display='block';
+}
+
+function toArabicNum(n){return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);}
+function closeQuran(){ovHide('ov-quran');quranAfterClose=null;}
+function closeQuranAndContinue(){ovHide('ov-quran');const fn=quranAfterClose;quranAfterClose=null;if(fn)fn();}
+
+/* ════════════════════════════════════════
+   GUESS THE SURAH MODE
+════════════════════════════════════════ */
+function setupGuessMode(){
+  const isTeam=playerMode==='team';
+  show('guess-page');
+
+  // Set names
+  if(isTeam){
+    const n1=document.getElementById('inp-t1').value||'الفريق الأول';
+    const n2=document.getElementById('inp-t2').value||'الفريق الثاني';
+    document.getElementById('gs-t1-name').textContent=n1;
+    document.getElementById('gs-t2-name').textContent=n2;
+    document.getElementById('guess-scoreboard').style.display='flex';
+    document.getElementById('guess-ind-stats').style.display='none';
+    document.getElementById('guess-turn').classList.remove('hidden');
+    gActiveTurn=1; updateGuessTurn();
+  } else {
+    document.getElementById('guess-scoreboard').style.display='none';
+    document.getElementById('guess-ind-stats').style.display='flex';
+    document.getElementById('guess-turn').classList.add('hidden');
+  }
+
+  document.getElementById('guess-mode-label').textContent=isTeam?'👥 فريقين':'👤 فردي';
+
+  // Build queue — all possible (surahIdx, ayahIdx) pairs, shuffled
+  buildGQueue();
+  gCurrent=0; gScores={1:0,2:0}; gInd={correct:0,wrong:0};
+  document.getElementById('guess-complete').classList.remove('show');
+  loadQuestion();
+}
+
+function buildGQueue(){
+  // Build all possible question pairs, shuffle, slice to gQCount
+  const all=[];
+  surahs.forEach((s,si)=>{
+    const bank=ayahBank[s.qn]||[];
+    bank.forEach((_,ai)=>all.push({si,ai}));
+  });
+  gQueue=shuffle(all).slice(0, gQCount);
+}
+
+function loadQuestion(){
+  if(gCurrent>=gQueue.length){
+    showGuessComplete(); return;
+  }
+  gAnswered=false;
+  const {si,ai}=gQueue[gCurrent];
+  const correctSurah=surahs[si];
+  const ayah=ayahBank[correctSurah.qn][ai];
+
+  // Progress
+  const total=gQueue.length;
+  document.getElementById('guess-q-label').textContent=`السؤال ${toArabicNum(gCurrent+1)}`;
+  document.getElementById('guess-q-total').textContent=`من ${toArabicNum(total)}`;
+  document.getElementById('guess-bar-fill').style.width=((gCurrent/total)*100)+'%';
+  document.getElementById('g-remain').textContent=total-gCurrent;
+  document.getElementById('g-total-count').textContent=total;
+
+  // Pick 2 ayahs from this surah (current + one more different if available)
+  const bank = ayahBank[correctSurah.qn];
+  let ayahText = ayah.t;
+  // Try to add a second distinct ayah from same surah
+  const otherAyahs = bank.filter((_,idx)=>idx!==ai);
+  if(otherAyahs.length>0){
+    const second = otherAyahs[Math.floor(Math.random()*otherAyahs.length)];
+    ayahText = ayah.t + ' ۝ ' + second.t;
+  }
+  document.getElementById('ayah-text').textContent=ayahText;
+  document.getElementById('guess-feedback').textContent='';
+  document.getElementById('guess-feedback').className='guess-feedback';
+  document.getElementById('guess-next-btn').style.display='none';
+
+  // Build 5 choices: 1 correct + 4 random wrong
+  const wrongPool=surahs.filter((_,i)=>i!==si);
+  shuffle(wrongPool);
+  const wrongChoices=wrongPool.slice(0,4);
+  const allChoices=shuffle([correctSurah,...wrongChoices]);
+
+  const grid=document.getElementById('choices-grid');
+  grid.innerHTML='';
+  allChoices.forEach(s=>{
+    const btn=document.createElement('button');
+    btn.className='choice-btn';
+    btn.textContent=`سورة ${s.name}`;
+    btn.dataset.qn=s.qn;
+    btn.onclick=()=>handleChoice(btn,s.qn===correctSurah.qn,correctSurah.qn);
+    grid.appendChild(btn);
+  });
+}
+
+function handleChoice(btn,isCorrect,correctQn){
+  if(gAnswered) return;
+  gAnswered=true;
+
+  // Disable all
+  document.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    document.getElementById('guess-feedback').textContent='✓ أحسنت!';
+    document.getElementById('guess-feedback').className='guess-feedback ok';
+    if(playerMode==='team'){
+      gScores[gActiveTurn]++;
+      const el=document.getElementById('gs-t'+gActiveTurn+'-score');
+      el.textContent=gScores[gActiveTurn]; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+    } else {
+      gInd.correct++; document.getElementById('g-correct').textContent=gInd.correct;
+    }
+  } else {
+    btn.classList.add('wrong');
+    // Highlight correct
+    document.querySelectorAll('.choice-btn').forEach(b=>{
+      if(parseInt(b.dataset.qn)===correctQn) b.classList.add('reveal');
+    });
+    const cName=surahs.find(s=>s.qn===correctQn).name;
+    document.getElementById('guess-feedback').textContent=`✗ الإجابة الصحيحة: سورة ${cName}`;
+    document.getElementById('guess-feedback').className='guess-feedback no';
+    if(playerMode==='solo'){
+      gInd.wrong++; document.getElementById('g-wrong').textContent=gInd.wrong;
+    }
+  }
+
+  // Switch turn in team mode
+  if(playerMode==='team'){
+    gActiveTurn=gActiveTurn===1?2:1;
+    updateGuessTurn();
+  }
+
+  document.getElementById('guess-next-btn').style.display='block';
+}
+
+function nextQuestion(){
+  gCurrent++;
+  loadQuestion();
+}
+
+function updateGuessTurn(){
+  const lbl=document.getElementById('guess-turn');
+  const name=document.getElementById(`gs-t${gActiveTurn}-name`).textContent;
+  lbl.className='guess-turn t'+gActiveTurn;
+  document.getElementById('guess-turn-name').textContent=name;
+}
+
+function showGuessComplete(){
+  document.getElementById('guess-bar-fill').style.width='100%';
+  document.getElementById('guess-next-btn').style.display='none';
+  const gc=document.getElementById('guess-complete');
+  let title,sub;
+  if(playerMode==='team'){
+    const s1=gScores[1],s2=gScores[2];
+    const n1=document.getElementById('gs-t1-name').textContent;
+    const n2=document.getElementById('gs-t2-name').textContent;
+    if(s1>s2){title=`🏆 ${n1} فاز!`;sub=`${s1} مقابل ${s2} نقطة`;}
+    else if(s2>s1){title=`🏆 ${n2} فاز!`;sub=`${s2} مقابل ${s1} نقطة`;}
+    else{title='🤝 تعادل!';sub=`${s1} نقطة لكل فريق`;}
+  } else {
+    title='🌟 أتممت الجولة!';
+    sub=`${gInd.correct} صح — ${gInd.wrong} خطأ من ${gQueue.length} سؤال`;
+  }
+  document.getElementById('gc-title').textContent=title;
+  document.getElementById('gc-sub').textContent=sub;
+  gc.classList.add('show');
+  gc.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function restartGuess(){
+  document.getElementById('guess-complete').classList.remove('show');
+  gScores={1:0,2:0}; gInd={correct:0,wrong:0};
+  if(playerMode==='team'){
+    document.getElementById('gs-t1-score').textContent='0';
+    document.getElementById('gs-t2-score').textContent='0';
+    gActiveTurn=1; updateGuessTurn();
+  } else {
+    document.getElementById('g-correct').textContent='0';
+    document.getElementById('g-wrong').textContent='0';
+  }
+  buildGQueue(); gCurrent=0; loadQuestion();
+  document.getElementById('guess-complete').scrollIntoView({behavior:'smooth',block:'start'});
 }
 </script>
 </body>
